@@ -30,7 +30,7 @@ The demo imports the library straight from source (`tsconfig.json` maps `ui` to 
 | Slider | `ui-slider` | `[(value)]`, `min`, `max`, `step`, `showValue`, `format`, forms |
 | File input | `ui-file-input` | Drag and drop, `multiple`, `accept`, value is `File[]`, forms |
 | Modal | `ui-modal` | Native `<dialog>`; `[(open)]`, `title`, `subtitle`, `size`, `closable`, `closeOnBackdrop`; `[uiModalFooter]` slot |
-| Table | `ui-table` | `data`, `columns`, sorting, `pageSize`, `selectable` + `[(selection)]`, `trackBy`, `striped`, `dense`, `ng-template uiCell="key"` |
+| Table | `ui-table` | `data`, `columns` (with optional `ariaLabel` for an empty header), sorting, `pageSize`, `selectable` + `[(selection)]`, `trackBy`, `striped`, `dense`, `ng-template uiCell="key"` |
 
 Every form control implements `ControlValueAccessor`, so it works with `formControlName`, `[formControl]` and `ngModel`. All components are standalone, use signals and `OnPush`, and work in zoneless apps.
 
