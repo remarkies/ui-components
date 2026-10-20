@@ -30,33 +30,40 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   `,
   styles: `
     :host { display: inline-flex; font-family: var(--ui-font); }
-    .root { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px; color: var(--ui-text); }
+    .root { position: relative; display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-size: 15px; color: var(--ui-text); }
     .root.disabled { cursor: not-allowed; color: var(--ui-text-disabled); }
     input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
     .track {
       flex: none;
       position: relative;
-      width: 38px;
+      box-sizing: border-box;
+      width: 40px;
       height: 22px;
+      border: 1.5px solid var(--ui-border-strong);
       border-radius: 999px;
-      background: var(--ui-border-strong);
-      transition: background var(--ui-transition), box-shadow var(--ui-transition);
+      background: var(--ui-surface-muted);
+      transition: background var(--ui-transition), border-color var(--ui-transition), box-shadow var(--ui-transition);
     }
     .thumb {
       position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 16px;
-      height: 16px;
+      top: 2.5px;
+      left: 2.5px;
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
-      background: #fff;
-      box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
-      transition: transform 180ms cubic-bezier(0.3, 0.7, 0.4, 1);
+      background: var(--ui-border-strong);
+      transition: transform 220ms var(--ui-ease), background var(--ui-transition), width 220ms var(--ui-ease);
     }
-    input:checked + .track { background: var(--ui-primary); }
-    input:checked + .track .thumb { transform: translateX(16px); }
+    .root:hover .track { border-color: var(--ui-text); }
+    .root:active .thumb { width: 18px; }
+    input:checked + .track { background: var(--ui-primary); border-color: var(--ui-primary-edge); }
+    input:checked + .track .thumb { transform: translateX(18px); background: var(--ui-on-primary); }
+    .root:active input:checked + .track .thumb { transform: translateX(14px); }
     input:focus-visible + .track { box-shadow: var(--ui-focus-ring); }
-    input:disabled + .track { opacity: 0.5; }
+    input:disabled + .track { background: var(--ui-surface-muted); border-color: var(--ui-border); }
+    input:disabled + .track .thumb { background: var(--ui-border); }
+    input:disabled:checked + .track { background: var(--ui-border); }
+    input:disabled:checked + .track .thumb { background: var(--ui-text-disabled); }
     .label:empty { display: none; }
   `,
 })

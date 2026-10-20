@@ -44,7 +44,7 @@ export type UiSize = 'sm' | 'md' | 'lg';
       height: var(--ui-control-h);
       padding: 0 16px;
       font-family: var(--ui-font);
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 600;
       line-height: 1;
       white-space: nowrap;
@@ -55,21 +55,31 @@ export type UiSize = 'sm' | 'md' | 'lg';
       border-radius: var(--ui-radius);
       cursor: pointer;
       user-select: none;
-      transition: background var(--ui-transition), border-color var(--ui-transition), box-shadow var(--ui-transition), transform 80ms ease;
+      -webkit-tap-highlight-color: transparent;
+      transition: background var(--ui-transition), border-color var(--ui-transition), color var(--ui-transition), box-shadow var(--ui-transition), transform 90ms var(--ui-ease);
     }
     :host(:hover) { background: var(--_bg-hover); }
     :host(:active) { transform: translateY(1px); }
     :host(:focus-visible) { outline: none; box-shadow: var(--ui-focus-ring); }
-    :host([disabled]), :host([aria-disabled='true']) { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
-    :host([aria-busy='true']) { opacity: 0.8; }
+    :host([aria-busy='true']) { cursor: progress; }
 
-    :host([data-variant='secondary']) { --_bg: var(--ui-primary-soft); --_bg-hover: color-mix(in srgb, var(--ui-primary) 18%, transparent); --_fg: var(--ui-primary); }
-    :host([data-variant='outline']) { --_bg: var(--ui-surface); --_bg-hover: var(--ui-surface-hover); --_fg: var(--ui-text); --_border: var(--ui-border-strong); }
+    :host([data-variant='secondary']) { --_bg: var(--ui-surface-hover); --_bg-hover: color-mix(in srgb, var(--ui-text) 14%, var(--ui-surface)); --_fg: var(--ui-text); }
+    :host([data-variant='outline']) { --_bg: var(--ui-surface); --_bg-hover: var(--ui-surface-muted); --_fg: var(--ui-text); --_border: var(--ui-border-strong); }
+    :host([data-variant='outline']:hover) { --_border: var(--ui-text); }
     :host([data-variant='ghost']) { --_bg: transparent; --_bg-hover: var(--ui-surface-hover); --_fg: var(--ui-text); }
     :host([data-variant='danger']) { --_bg: var(--ui-danger); --_bg-hover: var(--ui-danger-hover); --_fg: var(--ui-on-danger); }
 
-    :host([data-size='sm']) { height: var(--ui-control-h-sm); padding: 0 12px; font-size: 13px; border-radius: var(--ui-radius-sm); }
-    :host([data-size='lg']) { height: var(--ui-control-h-lg); padding: 0 22px; font-size: 16px; }
+    :host([disabled][data-variant]), :host([aria-disabled='true'][data-variant]) {
+      --_bg: var(--ui-surface-muted);
+      --_fg: var(--ui-text-disabled);
+      --_border: var(--ui-border);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    :host([disabled][data-variant='ghost']), :host([aria-disabled='true'][data-variant='ghost']) { --_bg: transparent; --_border: transparent; }
+
+    :host([data-size='sm']) { height: var(--ui-control-h-sm); padding: 0 12px; gap: 6px; font-size: 14px; border-radius: var(--ui-radius-sm); }
+    :host([data-size='lg']) { height: var(--ui-control-h-lg); padding: 0 22px; font-size: 17px; }
     :host([data-block]) { display: flex; width: 100%; }
     :host([data-icon-only]) { padding: 0; width: var(--ui-control-h); }
     :host([data-icon-only][data-size='sm']) { width: var(--ui-control-h-sm); }
@@ -78,6 +88,7 @@ export type UiSize = 'sm' | 'md' | 'lg';
     .spinner {
       width: 1em;
       height: 1em;
+      box-sizing: border-box;
       border: 2px solid currentColor;
       border-right-color: transparent;
       border-radius: 50%;

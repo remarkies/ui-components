@@ -54,44 +54,59 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     }
   `,
   styles: `
-    :host { display: flex; flex-direction: column; gap: 10px; font-family: var(--ui-font); }
+    :host { display: flex; flex-direction: column; gap: 8px; font-family: var(--ui-font); }
     .drop {
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 6px;
-      padding: 24px 16px;
+      padding: 28px 16px;
       text-align: center;
       border: 1.5px dashed var(--ui-border-strong);
       border-radius: var(--ui-radius-lg);
       background: var(--ui-surface);
       cursor: pointer;
-      transition: border-color var(--ui-transition), background var(--ui-transition);
+      transition: border-color var(--ui-transition), background var(--ui-transition), box-shadow var(--ui-transition);
     }
-    .drop:hover, .drop.dragging { border-color: var(--ui-primary); background: var(--ui-primary-soft); }
-    .drop:focus-within { box-shadow: var(--ui-focus-ring); border-color: var(--ui-primary); }
+    .drop:hover { border-color: var(--ui-text); background: var(--ui-surface-muted); }
+    .drop.dragging { border-style: solid; border-color: var(--ui-primary-edge); background: var(--ui-primary-soft); }
+    .drop:focus-within { box-shadow: var(--ui-focus-ring); border-color: var(--ui-text); }
     .drop.disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
     input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-    .icon { width: 28px; height: 28px; fill: none; stroke: var(--ui-primary); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-    .title { font-size: 14px; color: var(--ui-text-muted); }
-    .title strong { color: var(--ui-primary); font-weight: 600; }
-    .hint { font-size: 12px; color: var(--ui-text-muted); }
-    .list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+    .icon {
+      box-sizing: border-box;
+      width: 36px;
+      height: 36px;
+      padding: 7px;
+      margin-bottom: 4px;
+      border-radius: 50%;
+      background: var(--ui-primary);
+      fill: none;
+      stroke: var(--ui-on-primary);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform var(--ui-transition);
+    }
+    .drop:hover .icon, .drop.dragging .icon { transform: translateY(-2px); }
+    .title { font-size: 15px; color: var(--ui-text-muted); }
+    .title strong { color: var(--ui-text); font-weight: 600; text-decoration: underline; text-decoration-color: var(--ui-primary); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+    .hint { font-size: 13px; color: var(--ui-text-muted); }
+    .list { list-style: none; margin: 0; padding: 0; border: 1px solid var(--ui-border); border-radius: var(--ui-radius-lg); background: var(--ui-surface); }
     li {
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 8px 8px 8px 12px;
-      font-size: 13px;
-      border: 1px solid var(--ui-border);
-      border-radius: var(--ui-radius);
-      background: var(--ui-surface);
+      gap: 12px;
+      padding: 6px 6px 6px 12px;
+      font-size: 14px;
     }
+    li + li { border-top: 1px solid var(--ui-border); }
     .name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ui-text); }
     .size { color: var(--ui-text-muted); font-variant-numeric: tabular-nums; }
-    .remove { display: grid; place-items: center; width: 26px; height: 26px; padding: 0; border: 0; border-radius: var(--ui-radius-sm); background: transparent; cursor: pointer; color: var(--ui-text-muted); }
-    .remove:hover { background: var(--ui-surface-hover); color: var(--ui-danger); }
+    .remove { display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 0; border-radius: var(--ui-radius-sm); background: transparent; cursor: pointer; color: var(--ui-text-muted); transition: background var(--ui-transition), color var(--ui-transition); }
+    .remove:hover { background: var(--ui-danger-soft); color: var(--ui-danger); }
+    .remove:focus-visible { outline: none; box-shadow: var(--ui-focus-ring); }
     .remove svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
   `,
 })

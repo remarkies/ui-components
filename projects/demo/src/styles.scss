@@ -1,9 +1,24 @@
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+  scrollbar-color: var(--ui-border-strong) var(--ui-bg);
+}
 body {
   margin: 0;
   font-family: var(--ui-font);
+  font-size: 15px;
   background: var(--ui-bg);
   color: var(--ui-text);
   -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--ui-primary); color: var(--ui-on-primary); }
+a { text-decoration-color: var(--ui-primary); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+h4 { margin: 20px 0 4px; font-size: 16px; }
+
+@media (max-width: 900px) {
+  html { scroll-padding-top: 112px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }

@@ -78,6 +78,7 @@
               }
             ],
             "styles": [
+              "@fontsource-variable/source-sans-3/wght.css",
               "projects/ui/styles/theme.css",
               "projects/demo/src/styles.scss"
             ]

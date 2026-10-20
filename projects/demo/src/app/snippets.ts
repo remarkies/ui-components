@@ -1,4 +1,8 @@
 export const SNIPPETS = {
+  setup: `// angular.json -> "styles": ["node_modules/ui/styles/theme.css", ...]
+import { UI_COMPONENTS } from 'ui';
+
+@Component({ imports: [UI_COMPONENTS], ... })`,
   buttons: `<button uiButton (click)="save()">Save</button>
 <button uiButton variant="outline" size="sm">Cancel</button>
 <button uiButton variant="danger" [loading]="saving()">Delete</button>
@@ -8,7 +12,7 @@ export const SNIPPETS = {
 </ui-form-field>
 
 <ui-form-field label="Search">
-  <span uiPrefix>🔍</span>
+  <svg uiPrefix ...></svg>
   <input uiInput type="search" />
 </ui-form-field>`,
   selection: `<ui-checkbox [(checked)]="agree">I agree</ui-checkbox>

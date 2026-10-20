@@ -47,8 +47,8 @@ export interface UiFormFieldControl {
   `,
   styles: `
     .ui-form-field { display: flex; flex-direction: column; gap: 6px; font-family: var(--ui-font); min-width: 0; }
-    .ui-form-field__label { font-size: 13px; font-weight: 600; color: var(--ui-text); }
-    .ui-form-field__required { color: var(--ui-danger); margin-left: 2px; }
+    .ui-form-field__label { font-size: 14px; font-weight: 600; line-height: 1.3; color: var(--ui-text); }
+    .ui-form-field__required { color: var(--ui-danger); margin-left: 3px; }
     .ui-form-field__control { position: relative; display: flex; align-items: center; }
     .ui-form-field__control > [uiPrefix],
     .ui-form-field__control > [uiSuffix] {
@@ -59,14 +59,26 @@ export interface UiFormFieldControl {
       align-items: center;
       color: var(--ui-text-muted);
       font-size: 14px;
+      font-weight: 600;
     }
     .ui-form-field__control > [uiPrefix] { left: 12px; pointer-events: none; }
-    .ui-form-field__control > [uiSuffix] { right: 6px; }
-    .ui-form-field__control:has(> [uiPrefix]) > .ui-input { padding-left: 36px; }
+    .ui-form-field__control > [uiSuffix] { right: 4px; }
+    .ui-form-field__control:has(> [uiPrefix]) > .ui-input { padding-left: 38px; }
     .ui-form-field__control:has(> [uiSuffix]) > .ui-input { padding-right: 44px; }
-    .ui-form-field__hint, .ui-form-field__error { margin: 0; font-size: 12px; line-height: 1.4; }
+    .ui-form-field__hint, .ui-form-field__error { margin: 0; font-size: 13px; line-height: 1.4; }
     .ui-form-field__hint { color: var(--ui-text-muted); }
-    .ui-form-field__error { color: var(--ui-danger); }
+    /* Red-white-red, the mountain-trail blaze, marks an error. */
+    .ui-form-field__error { display: flex; align-items: baseline; gap: 7px; color: var(--ui-danger); font-weight: 600; }
+    .ui-form-field__error::before {
+      content: '';
+      flex: none;
+      width: 12px;
+      height: 9px;
+      border-radius: 1px;
+      background: linear-gradient(var(--ui-danger) 33%, var(--ui-surface) 33% 67%, var(--ui-danger) 67%);
+      box-shadow: 0 0 0 1px var(--ui-danger);
+      transform: translateY(-1px);
+    }
   `,
 })
 export class UiFormField {

@@ -35,41 +35,49 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     />
   `,
   styles: `
-    :host { display: flex; flex-direction: column; gap: 8px; font-family: var(--ui-font); min-width: 160px; }
-    .header { display: flex; justify-content: space-between; font-size: 13px; }
+    :host { display: flex; flex-direction: column; gap: 6px; font-family: var(--ui-font); min-width: 160px; }
+    .header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 14px; }
     .label { font-weight: 600; color: var(--ui-text); }
-    .value { color: var(--ui-text-muted); font-variant-numeric: tabular-nums; }
+    .value { font-weight: 600; color: var(--ui-text); font-variant-numeric: tabular-nums; }
     input {
       appearance: none;
       width: 100%;
-      height: 20px;
+      height: 24px;
       margin: 0;
       background: transparent;
       cursor: pointer;
     }
-    input:disabled { cursor: not-allowed; opacity: 0.5; }
+    input:disabled { cursor: not-allowed; }
     input:focus { outline: none; }
     input::-webkit-slider-runnable-track {
-      height: 6px;
+      height: 4px;
       border-radius: 999px;
-      background: linear-gradient(to right, var(--ui-primary) var(--_pct), var(--ui-border) var(--_pct));
+      background: linear-gradient(to right, var(--ui-text) var(--_pct), var(--ui-border) var(--_pct));
     }
-    input::-moz-range-track { height: 6px; border-radius: 999px; background: var(--ui-border); }
-    input::-moz-range-progress { height: 6px; border-radius: 999px; background: var(--ui-primary); }
+    input::-moz-range-track { height: 4px; border-radius: 999px; background: var(--ui-border); }
+    input::-moz-range-progress { height: 4px; border-radius: 999px; background: var(--ui-text); }
     input::-webkit-slider-thumb {
       appearance: none;
-      width: 18px;
-      height: 18px;
-      margin-top: -6px;
+      box-sizing: border-box;
+      width: 20px;
+      height: 20px;
+      margin-top: -8px;
       border-radius: 50%;
-      background: var(--ui-surface);
-      border: 2px solid var(--ui-primary);
+      background: var(--ui-primary);
+      border: 2px solid var(--ui-primary-edge);
       box-shadow: var(--ui-shadow-sm);
-      transition: box-shadow var(--ui-transition);
+      transition: box-shadow var(--ui-transition), transform var(--ui-transition);
     }
-    input::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--ui-surface); border: 2px solid var(--ui-primary); }
+    input::-moz-range-thumb { box-sizing: border-box; width: 20px; height: 20px; border-radius: 50%; background: var(--ui-primary); border: 2px solid var(--ui-primary-edge); transition: box-shadow var(--ui-transition), transform var(--ui-transition); }
+    input:not(:disabled):hover::-webkit-slider-thumb { transform: scale(1.1); }
+    input:not(:disabled):hover::-moz-range-thumb { transform: scale(1.1); }
     input:focus-visible::-webkit-slider-thumb { box-shadow: var(--ui-focus-ring); }
     input:focus-visible::-moz-range-thumb { box-shadow: var(--ui-focus-ring); }
+    input:disabled::-webkit-slider-runnable-track { background: linear-gradient(to right, var(--ui-text-disabled) var(--_pct), var(--ui-border) var(--_pct)); }
+    input:disabled::-moz-range-progress { background: var(--ui-text-disabled); }
+    input:disabled::-webkit-slider-thumb { background: var(--ui-surface-muted); border-color: var(--ui-text-disabled); box-shadow: none; }
+    input:disabled::-moz-range-thumb { background: var(--ui-surface-muted); border-color: var(--ui-text-disabled); }
+    :host(:has(input:disabled)) .label, :host(:has(input:disabled)) .value { color: var(--ui-text-disabled); }
   `,
 })
 export class UiSlider implements ControlValueAccessor {

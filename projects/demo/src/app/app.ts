@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { afterNextRender, Component, computed, DestroyRef, effect, inject, signal } from '@angular/core';
 import { DatePipe, JsonPipe } from '@angular/common';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UI_COMPONENTS, UiTableColumn } from 'ui';
@@ -25,12 +25,56 @@ export class App {
     { id: 'table', label: 'Table' },
   ];
 
+  // Signpost: highlight the section currently in view.
+  protected readonly active = signal('buttons');
+  private readonly destroyRef = inject(DestroyRef);
+
   // Theme
   protected readonly dark = signal(
     typeof matchMedia !== 'undefined' && matchMedia('(prefers-color-scheme: dark)').matches,
   );
   constructor() {
     this.applyTheme();
+    afterNextRender(() => this.watchSections());
+    // On narrow screens the signpost is a horizontal strip: keep the current sign in view.
+    effect(() => {
+      const link = document.querySelector<HTMLElement>(`.signpost a[href="#${this.active()}"]`);
+      const strip = link?.closest<HTMLElement>('.signpost');
+      if (!link || !strip || strip.scrollWidth <= strip.clientWidth) return;
+      strip.scrollTo({ left: link.offsetLeft - 16, behavior: 'smooth' });
+    });
+  }
+
+  private watchSections() {
+    const visible = new Map<string, number>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) visible.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0);
+        // The first section (in page order) that is on screen wins.
+        const current = this.sections.find((s) => (visible.get(s.id) ?? 0) > 0);
+        if (current) this.active.set(current.id);
+      },
+      { rootMargin: '-72px 0px -55% 0px', threshold: [0, 0.01] },
+    );
+    for (const s of this.sections) {
+      const el = document.getElementById(s.id);
+      if (el) observer.observe(el);
+    }
+    this.destroyRef.onDestroy(() => observer.disconnect());
+  }
+
+  // Code snippets
+  protected readonly copied = signal<string | null>(null);
+  private copiedTimer?: ReturnType<typeof setTimeout>;
+  protected async copy(key: keyof typeof SNIPPETS) {
+    try {
+      await navigator.clipboard.writeText(SNIPPETS[key]);
+      this.copied.set(key);
+      clearTimeout(this.copiedTimer);
+      this.copiedTimer = setTimeout(() => this.copied.set(null), 1600);
+    } catch {
+      this.copied.set(null);
+    }
   }
   protected toggleTheme() {
     this.dark.update((d) => !d);
@@ -63,7 +107,7 @@ export class App {
     { type: 'month', label: 'Month', placeholder: '' },
     { type: 'week', label: 'Week', placeholder: '' },
   ];
-  protected color = '#4f46e5';
+  protected color = '#ffcc00';
 
   // Selection
   protected readonly toppings = signal([
@@ -139,6 +183,16 @@ export class App {
   protected readonly lastAction = signal('');
   protected inviteEmail = '';
   protected inviteRole = 'Editor';
+  protected readonly terms = [
+    { title: '1. What these terms cover', body: 'These sample terms show how the modal handles a long body. The header and footer stay in place while the content between them scrolls, and the dialog never grows taller than the viewport.' },
+    { title: '2. Using the components', body: 'You may use, copy and modify the components in your own Angular applications. Import what you need individually, or everything at once with UI_COMPONENTS.' },
+    { title: '3. Theming', body: 'Every colour, radius and control height is a --ui-* custom property. Override them on :root or on any subtree to adapt the look to your product without touching component code.' },
+    { title: '4. Accessibility', body: 'The components build on native elements, so keyboard support, focus handling and screen reader semantics come from the browser. Keep labels on every control and an aria-label on icon-only buttons.' },
+    { title: '5. Browser support', body: 'The styles rely on light-dark(), color-mix() and :has(), which are available in current versions of Chrome, Edge, Firefox and Safari.' },
+    { title: '6. Changes', body: 'Component inputs and token names are treated as public API. Renaming one is a breaking change and is called out in the release notes.' },
+    { title: '7. No warranty', body: 'The components are provided as they are. Test them in your own application before relying on them in production.' },
+    { title: '8. Contact', body: 'Questions and bug reports go to the repository issue tracker, with a minimal reproduction where possible.' },
+  ];
 
   protected confirmDelete() {
     this.deleting.set(true);
