@@ -9,53 +9,54 @@
 :root {
   color-scheme: light dark;
 
-  --ui-font: 'Source Sans 3 Variable', 'Source Sans 3', 'Frutiger', 'Segoe UI', system-ui, sans-serif;
+  --ui-font: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --ui-font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
 
-  /* Action pair: signal yellow carrying granite ink, like a trail sign. */
-  --ui-primary: light-dark(#ffcc00, #ffd21a);
-  --ui-primary-hover: light-dark(#f2bd00, #ffdc4d);
-  --ui-primary-soft: light-dark(#fff5c7, rgb(255 210 26 / 0.13));
-  --ui-on-primary: #1d1b10;
-  /* Outline drawn around yellow fills so they hold 3:1 against the surface. */
-  --ui-primary-edge: light-dark(#1d1b10, #ffd21a);
+  /* Accent: one blue, used for primary actions, selection and focus only. */
+  --ui-primary: light-dark(#3e63dd, #3e63dd);
+  --ui-primary-hover: light-dark(#3358d4, #5472e4);
+  --ui-primary-soft: light-dark(#edf2fe, rgb(62 99 221 / 0.2));
+  /* Accent-colored text on soft or neutral surfaces. */
+  --ui-primary-text: light-dark(#3a5bc7, #9eb1ff);
+  --ui-on-primary: #ffffff;
+  /* Border drawn around accent fills (checked controls, current page). */
+  --ui-primary-edge: var(--ui-primary);
 
-  --ui-danger: light-dark(#c42b1c, #ff7a69);
-  --ui-danger-hover: light-dark(#a32216, #ff9a8c);
-  --ui-danger-soft: light-dark(#fcebe8, rgb(255 122 105 / 0.12));
-  --ui-on-danger: light-dark(#ffffff, #230a06);
+  --ui-danger: light-dark(#ce2c31, #e5484d);
+  --ui-danger-hover: light-dark(#b8262b, #ec5d5e);
+  --ui-danger-soft: light-dark(#ffebec, rgb(229 72 77 / 0.16));
+  --ui-on-danger: #ffffff;
 
-  --ui-success: light-dark(#2a7546, #63c98f);
-  --ui-success-soft: light-dark(#e5f2e9, rgb(99 201 143 / 0.13));
+  --ui-success: light-dark(#18794e, #3dd68c);
+  --ui-success-soft: light-dark(#e6f6eb, rgb(61 214 140 / 0.14));
 
-  /* Granite and stone neutrals, tinted slightly green-cool. */
-  --ui-bg: light-dark(#eceeeb, #111312);
-  --ui-surface: light-dark(#fcfcfb, #191c1b);
-  --ui-surface-muted: light-dark(#f2f3f1, #202423);
-  --ui-surface-hover: light-dark(#e8eae7, #262a29);
-  --ui-border: light-dark(#d9dcd9, #2c3130);
-  --ui-border-strong: light-dark(#868d89, #6d7471);
-  --ui-text: light-dark(#1c1e1d, #e8eae6);
-  --ui-text-muted: light-dark(#575d5a, #a4aaa6);
-  --ui-text-disabled: light-dark(#9ba19e, #5d6461);
-  --ui-ink: light-dark(#1c1e1d, #0c0d0d);
-  --ui-on-ink: #eceeeb;
+  /* Slate neutrals, tinted slightly blue. */
+  --ui-bg: light-dark(#f9f9fb, #111113);
+  --ui-surface: light-dark(#ffffff, #18191b);
+  /* Floating surfaces (modal) sit one step above the page surface. */
+  --ui-surface-raised: light-dark(#ffffff, #212225);
+  --ui-surface-muted: light-dark(#f9f9fb, #1d1e21);
+  --ui-surface-hover: light-dark(#f0f0f3, #26282c);
+  --ui-border: light-dark(#e0e1e6, #2e3135);
+  --ui-border-strong: light-dark(#8b8d98, #696e77);
+  --ui-text: light-dark(#1c2024, #edeef0);
+  --ui-text-muted: light-dark(#60646c, #b0b4ba);
+  --ui-text-disabled: light-dark(#b0b4ba, #5a6169);
 
-  --ui-radius-sm: 3px;
-  --ui-radius: 4px;
-  --ui-radius-lg: 6px;
-  /* Ink line then yellow halo: visible on every surface in both themes. */
-  --ui-focus-ring: 0 0 0 2px var(--ui-text), 0 0 0 5px var(--ui-primary);
-  --ui-shadow-sm: 0 1px 2px light-dark(rgb(28 30 29 / 0.07), rgb(0 0 0 / 0.4));
-  --ui-shadow-lg: 0 24px 48px -16px light-dark(rgb(20 22 21 / 0.32), rgb(0 0 0 / 0.7)),
-    0 2px 6px light-dark(rgb(20 22 21 / 0.08), rgb(0 0 0 / 0.4));
-  --ui-backdrop: light-dark(rgb(17 19 18 / 0.5), rgb(0 0 0 / 0.66));
+  --ui-radius-sm: 4px;
+  --ui-radius: 6px;
+  --ui-radius-lg: 8px;
+  --ui-focus-ring: 0 0 0 2px var(--ui-surface), 0 0 0 4px var(--ui-primary);
+  --ui-shadow-sm: 0 1px 2px light-dark(rgb(28 32 36 / 0.06), rgb(0 0 0 / 0.3));
+  --ui-shadow-lg: 0 16px 40px -12px light-dark(rgb(28 32 36 / 0.25), rgb(0 0 0 / 0.6)),
+    0 2px 6px light-dark(rgb(28 32 36 / 0.06), rgb(0 0 0 / 0.3));
+  --ui-backdrop: light-dark(rgb(28 32 36 / 0.4), rgb(0 0 0 / 0.7));
 
   --ui-control-h-sm: 32px;
-  --ui-control-h: 40px;
-  --ui-control-h-lg: 48px;
+  --ui-control-h: 36px;
+  --ui-control-h-lg: 44px;
   --ui-ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --ui-transition: 160ms var(--ui-ease);
+  --ui-transition: 150ms var(--ui-ease);
 }
 
 :root[data-theme='light'] { color-scheme: light; }
@@ -73,7 +74,7 @@
   padding: 0 12px;
   font: inherit;
   font-family: var(--ui-font);
-  font-size: 15px;
+  font-size: 14px;
   color: var(--ui-text);
   caret-color: var(--ui-text);
   background: var(--ui-surface);
@@ -83,21 +84,21 @@
   transition: border-color var(--ui-transition), box-shadow var(--ui-transition), background var(--ui-transition);
 }
 .ui-input::placeholder { color: var(--ui-text-disabled); opacity: 1; }
-.ui-input::selection { background: var(--ui-primary); color: var(--ui-on-primary); }
-.ui-input:hover:not(:disabled) { border-color: var(--ui-text); }
-.ui-input:focus-visible { border-color: var(--ui-text); box-shadow: 0 0 0 3px var(--ui-primary); }
+.ui-input::selection { background: color-mix(in srgb, var(--ui-primary) 25%, transparent); }
+.ui-input:hover:not(:disabled) { border-color: var(--ui-text-muted); }
+.ui-input:focus-visible { border-color: var(--ui-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ui-primary) 25%, transparent); }
 .ui-input:disabled { color: var(--ui-text-disabled); background: var(--ui-surface-muted); border-color: var(--ui-border); cursor: not-allowed; }
 .ui-input[aria-invalid='true'] { border-color: var(--ui-danger); }
 .ui-input[aria-invalid='true']:hover:not(:disabled) { border-color: var(--ui-danger); }
 .ui-input[aria-invalid='true']:focus-visible { border-color: var(--ui-danger); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ui-danger) 35%, transparent); }
-.ui-input[data-size='sm'] { min-height: var(--ui-control-h-sm); font-size: 14px; padding: 0 10px; }
-.ui-input[data-size='lg'] { min-height: var(--ui-control-h-lg); font-size: 17px; padding: 0 14px; }
+.ui-input[data-size='sm'] { min-height: var(--ui-control-h-sm); font-size: 13px; padding: 0 10px; }
+.ui-input[data-size='lg'] { min-height: var(--ui-control-h-lg); font-size: 15px; padding: 0 14px; }
 input.ui-input[type='number'] { font-variant-numeric: tabular-nums; }
 textarea.ui-input { padding: 9px 12px; min-height: 96px; resize: vertical; line-height: 1.5; }
 select.ui-input {
   appearance: none;
   padding-right: 36px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%237c837f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2380838d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 12px center;
   cursor: pointer;

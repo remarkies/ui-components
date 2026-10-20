@@ -69,9 +69,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       cursor: pointer;
       transition: border-color var(--ui-transition), background var(--ui-transition), box-shadow var(--ui-transition);
     }
-    .drop:hover { border-color: var(--ui-text); background: var(--ui-surface-muted); }
+    .drop:hover { border-color: var(--ui-primary); background: var(--ui-surface-muted); }
     .drop.dragging { border-style: solid; border-color: var(--ui-primary-edge); background: var(--ui-primary-soft); }
-    .drop:focus-within { box-shadow: var(--ui-focus-ring); border-color: var(--ui-text); }
+    .drop:focus-within { box-shadow: var(--ui-focus-ring); border-color: var(--ui-primary); }
     .drop.disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
     input { position: absolute; opacity: 0; width: 1px; height: 1px; }
     .icon {
@@ -81,25 +81,25 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       padding: 7px;
       margin-bottom: 4px;
       border-radius: 50%;
-      background: var(--ui-primary);
+      background: var(--ui-primary-soft);
       fill: none;
-      stroke: var(--ui-on-primary);
+      stroke: var(--ui-primary-text);
       stroke-width: 2;
       stroke-linecap: round;
       stroke-linejoin: round;
       transition: transform var(--ui-transition);
     }
     .drop:hover .icon, .drop.dragging .icon { transform: translateY(-2px); }
-    .title { font-size: 15px; color: var(--ui-text-muted); }
-    .title strong { color: var(--ui-text); font-weight: 600; text-decoration: underline; text-decoration-color: var(--ui-primary); text-decoration-thickness: 2px; text-underline-offset: 3px; }
-    .hint { font-size: 13px; color: var(--ui-text-muted); }
+    .title { font-size: 14px; color: var(--ui-text-muted); }
+    .title strong { color: var(--ui-primary-text); font-weight: 500; }
+    .hint { font-size: 12px; color: var(--ui-text-muted); }
     .list { list-style: none; margin: 0; padding: 0; border: 1px solid var(--ui-border); border-radius: var(--ui-radius-lg); background: var(--ui-surface); }
     li {
       display: flex;
       align-items: center;
       gap: 12px;
       padding: 6px 6px 6px 12px;
-      font-size: 14px;
+      font-size: 13px;
     }
     li + li { border-top: 1px solid var(--ui-border); }
     .name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ui-text); }

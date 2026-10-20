@@ -40,9 +40,9 @@ let nextGroupId = 0;
   `,
   styles: `
     :host { display: flex; flex-direction: column; gap: 10px; font-family: var(--ui-font); }
-    .legend { font-size: 14px; font-weight: 600; color: var(--ui-text); }
+    .legend { font-size: 13px; font-weight: 500; color: var(--ui-text); }
     .options { display: flex; flex-direction: column; gap: 10px; }
-    :host([data-direction='horizontal']) .options { flex-direction: row; flex-wrap: wrap; gap: 8px 20px; }
+    :host([data-direction='horizontal']) .options { flex-direction: row; flex-wrap: wrap; gap: 8px 12px; }
   `,
 })
 export class UiRadioGroup<T = unknown> implements ControlValueAccessor {
@@ -102,7 +102,7 @@ export class UiRadioGroup<T = unknown> implements ControlValueAccessor {
   `,
   styles: `
     :host { display: inline-flex; font-family: var(--ui-font); }
-    .root { position: relative; display: inline-flex; align-items: flex-start; gap: 10px; cursor: pointer; font-size: 15px; color: var(--ui-text); }
+    .root { position: relative; display: inline-flex; align-items: flex-start; gap: 8px; cursor: pointer; font-size: 14px; color: var(--ui-text); }
     .root.disabled { cursor: not-allowed; color: var(--ui-text-disabled); }
     input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
     .dot {
@@ -120,13 +120,13 @@ export class UiRadioGroup<T = unknown> implements ControlValueAccessor {
     .dot::after {
       content: '';
       position: absolute;
-      inset: 3.5px;
+      inset: 4px;
       border-radius: 50%;
       background: var(--ui-on-primary);
       transform: scale(0);
       transition: transform var(--ui-transition);
     }
-    .root:hover .dot { border-color: var(--ui-text); }
+    .root:hover .dot { border-color: var(--ui-primary); }
     input:checked + .dot { background: var(--ui-primary); border-color: var(--ui-primary-edge); }
     input:checked + .dot::after { transform: scale(1); }
     input:focus-visible + .dot { box-shadow: var(--ui-focus-ring); }
@@ -134,7 +134,7 @@ export class UiRadioGroup<T = unknown> implements ControlValueAccessor {
     input:disabled:checked + .dot { background: var(--ui-border); }
     input:disabled + .dot::after { background: var(--ui-text-disabled); }
     .text { display: flex; flex-direction: column; gap: 1px; line-height: 20px; }
-    .description { font-size: 13px; line-height: 1.4; color: var(--ui-text-muted); }
+    .description { font-size: 12px; line-height: 1.4; color: var(--ui-text-muted); }
     .root.disabled .description { color: var(--ui-text-disabled); }
   `,
 })

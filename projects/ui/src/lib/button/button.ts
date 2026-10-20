@@ -44,8 +44,8 @@ export type UiSize = 'sm' | 'md' | 'lg';
       height: var(--ui-control-h);
       padding: 0 16px;
       font-family: var(--ui-font);
-      font-size: 15px;
-      font-weight: 600;
+      font-size: 14px;
+      font-weight: 500;
       line-height: 1;
       white-space: nowrap;
       text-decoration: none;
@@ -59,15 +59,16 @@ export type UiSize = 'sm' | 'md' | 'lg';
       transition: background var(--ui-transition), border-color var(--ui-transition), color var(--ui-transition), box-shadow var(--ui-transition), transform 90ms var(--ui-ease);
     }
     :host(:hover) { background: var(--_bg-hover); }
-    :host(:active) { transform: translateY(1px); }
+    :host(:active) { transform: scale(0.98); }
     :host(:focus-visible) { outline: none; box-shadow: var(--ui-focus-ring); }
     :host([aria-busy='true']) { cursor: progress; }
 
-    :host([data-variant='secondary']) { --_bg: var(--ui-surface-hover); --_bg-hover: color-mix(in srgb, var(--ui-text) 14%, var(--ui-surface)); --_fg: var(--ui-text); }
+    :host([data-variant='secondary']) { --_bg: var(--ui-primary-soft); --_bg-hover: color-mix(in srgb, var(--ui-primary) 18%, var(--ui-surface)); --_fg: var(--ui-primary-text); }
     :host([data-variant='outline']) { --_bg: var(--ui-surface); --_bg-hover: var(--ui-surface-muted); --_fg: var(--ui-text); --_border: var(--ui-border-strong); }
-    :host([data-variant='outline']:hover) { --_border: var(--ui-text); }
+    :host([data-variant='outline']:hover) { --_border: var(--ui-text-muted); }
     :host([data-variant='ghost']) { --_bg: transparent; --_bg-hover: var(--ui-surface-hover); --_fg: var(--ui-text); }
-    :host([data-variant='danger']) { --_bg: var(--ui-danger); --_bg-hover: var(--ui-danger-hover); --_fg: var(--ui-on-danger); }
+    /* In dark mode the danger fill is deepened so white text keeps 4.5:1. */
+    :host([data-variant='danger']) { --_bg: light-dark(var(--ui-danger), color-mix(in srgb, var(--ui-danger) 78%, #000)); --_bg-hover: light-dark(var(--ui-danger-hover), color-mix(in srgb, var(--ui-danger) 88%, #000)); --_fg: var(--ui-on-danger); }
 
     :host([disabled][data-variant]), :host([aria-disabled='true'][data-variant]) {
       --_bg: var(--ui-surface-muted);
@@ -78,8 +79,8 @@ export type UiSize = 'sm' | 'md' | 'lg';
     }
     :host([disabled][data-variant='ghost']), :host([aria-disabled='true'][data-variant='ghost']) { --_bg: transparent; --_border: transparent; }
 
-    :host([data-size='sm']) { height: var(--ui-control-h-sm); padding: 0 12px; gap: 6px; font-size: 14px; border-radius: var(--ui-radius-sm); }
-    :host([data-size='lg']) { height: var(--ui-control-h-lg); padding: 0 22px; font-size: 17px; }
+    :host([data-size='sm']) { height: var(--ui-control-h-sm); padding: 0 12px; gap: 6px; font-size: 13px; border-radius: var(--ui-radius-sm); }
+    :host([data-size='lg']) { height: var(--ui-control-h-lg); padding: 0 20px; font-size: 15px; }
     :host([data-block]) { display: flex; width: 100%; }
     :host([data-icon-only]) { padding: 0; width: var(--ui-control-h); }
     :host([data-icon-only][data-size='sm']) { width: var(--ui-control-h-sm); }

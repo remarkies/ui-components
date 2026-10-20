@@ -74,7 +74,7 @@ export class UiModalFooter {}
       padding: 0;
       border: 1px solid var(--ui-border);
       border-radius: var(--ui-radius-lg);
-      background: var(--ui-surface);
+      background: var(--ui-surface-raised, var(--ui-surface));
       color: var(--ui-text);
       font-family: var(--ui-font);
       box-shadow: var(--ui-shadow-lg);
@@ -92,13 +92,13 @@ export class UiModalFooter {}
     .panel { display: flex; flex-direction: column; max-height: inherit; }
     header { display: flex; align-items: flex-start; gap: 16px; padding: 22px 24px 0; }
     .heading { flex: 1; min-width: 0; }
-    h2 { margin: 0; font-size: 20px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; text-wrap: balance; }
-    .heading p { margin: 4px 0 0; font-size: 15px; color: var(--ui-text-muted); }
+    h2 { margin: 0; font-size: 18px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; text-wrap: balance; }
+    .heading p { margin: 4px 0 0; font-size: 14px; color: var(--ui-text-muted); }
     .close { flex: none; display: grid; place-items: center; width: 32px; height: 32px; margin: -4px -8px 0 0; padding: 0; border: 0; border-radius: var(--ui-radius); background: transparent; color: var(--ui-text-muted); cursor: pointer; transition: background var(--ui-transition), color var(--ui-transition); }
     .close:hover { background: var(--ui-surface-hover); color: var(--ui-text); }
     .close:focus-visible { outline: none; box-shadow: var(--ui-focus-ring); }
     .close svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
-    .body { padding: 14px 24px 24px; overflow-y: auto; font-size: 15px; line-height: 1.6; }
+    .body { padding: 14px 24px 24px; overflow-y: auto; font-size: 14px; line-height: 1.6; }
     .body > ::ng-deep :first-child { margin-top: 0; }
     .body > ::ng-deep :last-child { margin-bottom: 0; }
     footer { padding: 14px 24px; border-top: 1px solid var(--ui-border); background: var(--ui-surface-muted); border-radius: 0 0 var(--ui-radius-lg) var(--ui-radius-lg); }

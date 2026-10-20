@@ -36,7 +36,8 @@ No third-party design system underneath: native elements (`<button>`, `<input>`,
 
 ## Brand Commitments
 
-None confirmed. The name is the working title "UI Components".
+- The name is the working title "UI Components".
+- Visual direction (confirmed by Luka, 2026-10-20): the category standard, a conventional neutral kit at the craft level of Radix Themes and Linear. Prefer familiar, conventional choices over a distinctive visual world.
 
 ## Evidence on Hand
 

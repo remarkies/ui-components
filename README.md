@@ -72,13 +72,13 @@ All colors, radii and sizes are CSS variables in `projects/ui/styles/theme.css`.
   --ui-primary: light-dark(#0d9488, #2dd4bf);
   --ui-primary-hover: light-dark(#0f766e, #5eead4);
   --ui-on-primary: #ffffff;
-  --ui-radius: 6px;
+  --ui-radius: 8px;
 }
 ```
 
 Dark mode follows the OS setting automatically. Force a theme with `<html data-theme="dark">` or `data-theme="light"`.
 
-The default look pairs signal yellow with granite ink, taken from Swiss hiking-trail signs. `DESIGN.md` documents the tokens and rules. The theme expects the [Source Sans 3](https://fontsource.org/fonts/source-sans-3) font; install `@fontsource-variable/source-sans-3` and add its `wght.css` to your styles, or set `--ui-font` to your own stack.
+The default look is a neutral kit in the Radix/Linear style: slate grays, one blue accent, Inter. `DESIGN.md` documents the tokens and rules. The theme expects the [Inter](https://fontsource.org/fonts/inter) font; install `@fontsource-variable/inter` and add its `wght.css` to your styles, or set `--ui-font` to your own stack.
 
 ## Design workflow (Impeccable)
 

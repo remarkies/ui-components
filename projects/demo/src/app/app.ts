@@ -25,7 +25,7 @@ export class App {
     { id: 'table', label: 'Table' },
   ];
 
-  // Signpost: highlight the section currently in view.
+  // Sidebar: highlight the section currently in view.
   protected readonly active = signal('buttons');
   private readonly destroyRef = inject(DestroyRef);
 
@@ -36,10 +36,10 @@ export class App {
   constructor() {
     this.applyTheme();
     afterNextRender(() => this.watchSections());
-    // On narrow screens the signpost is a horizontal strip: keep the current sign in view.
+    // On narrow screens the sidebar is a horizontal strip: keep the current link in view.
     effect(() => {
-      const link = document.querySelector<HTMLElement>(`.signpost a[href="#${this.active()}"]`);
-      const strip = link?.closest<HTMLElement>('.signpost');
+      const link = document.querySelector<HTMLElement>(`.sidenav a[href="#${this.active()}"]`);
+      const strip = link?.closest<HTMLElement>('.sidenav');
       if (!link || !strip || strip.scrollWidth <= strip.clientWidth) return;
       strip.scrollTo({ left: link.offsetLeft - 16, behavior: 'smooth' });
     });
@@ -117,7 +117,7 @@ export class App {
     { type: 'month', label: 'Month', placeholder: '' },
     { type: 'week', label: 'Week', placeholder: '' },
   ];
-  protected color = '#ffcc00';
+  protected color = '#3e63dd';
 
   // Selection
   protected readonly toppings = signal([

@@ -1,67 +1,65 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-20T21:50:00Z",
+  "generatedAt": "2026-10-20T21:55:00Z",
   "title": "Design System: UI Components",
   "extensions": {
     "colorMeta": {
-      "signal-yellow": { "role": "primary", "displayName": "Signal Yellow", "tonalRamp": ["#fff5c7", "#ffe680", "#ffcc00", "#f2bd00", "#c79a00"] },
-      "granite-ink": { "role": "neutral", "displayName": "Granite Ink" },
-      "stone-ground": { "role": "neutral", "displayName": "Stone Ground", "tonalRamp": ["#fcfcfb", "#f2f3f1", "#eceeeb", "#e8eae7", "#d9dcd9", "#868d89"] },
-      "swiss-red": { "role": "danger", "displayName": "Swiss Red" },
-      "meadow-green": { "role": "success", "displayName": "Meadow Green" },
-      "night-ground": { "role": "neutral", "displayName": "Granite Night" }
+      "accent": { "role": "primary", "displayName": "Accent Blue", "tonalRamp": ["#edf2fe", "#d2deff", "#abbdf9", "#3e63dd", "#3358d4", "#3a5bc7"] },
+      "slate-ground": { "role": "neutral", "displayName": "Slate", "tonalRamp": ["#ffffff", "#f9f9fb", "#f0f0f3", "#e0e1e6", "#b0b4ba", "#8b8d98", "#60646c", "#1c2024"] },
+      "danger": { "role": "danger", "displayName": "Danger Red" },
+      "success": { "role": "success", "displayName": "Success Green" },
+      "night-ground": { "role": "neutral", "displayName": "Night Slate" }
     },
     "typographyMeta": {
       "display": { "displayName": "Display", "purpose": "Demo page title only." },
-      "heading": { "displayName": "Section heading", "purpose": "Section titles, preceded by the small trail sign." },
+      "heading": { "displayName": "Section heading", "purpose": "Section titles." },
       "label": { "displayName": "Label", "purpose": "Field labels, legends, table headers." }
     },
     "shadows": [
-      { "name": "shadow-sm", "value": "0 1px 2px rgb(28 30 29 / 0.07)", "purpose": "Slider thumb only." },
-      { "name": "shadow-lg", "value": "0 24px 48px -16px rgb(20 22 21 / 0.32), 0 2px 6px rgb(20 22 21 / 0.08)", "purpose": "Modal, the only floating surface." },
-      { "name": "focus-ring", "value": "0 0 0 2px var(--ui-text), 0 0 0 5px var(--ui-primary)", "purpose": "Keyboard focus on every interactive element." }
+      { "name": "shadow-sm", "value": "0 1px 2px rgb(28 32 36 / 0.06)", "purpose": "Thumbs only." },
+      { "name": "shadow-lg", "value": "0 16px 40px -12px rgb(28 32 36 / 0.25), 0 2px 6px rgb(28 32 36 / 0.06)", "purpose": "Modal, the only floating surface." },
+      { "name": "focus-ring", "value": "0 0 0 2px var(--ui-surface), 0 0 0 4px var(--ui-primary)", "purpose": "Keyboard focus on every interactive element." }
     ],
     "motion": [
       { "name": "ease", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "All state transitions." },
-      { "name": "transition", "value": "160ms", "purpose": "Default duration; 0ms under prefers-reduced-motion." },
-      { "name": "sign-morph", "value": "260ms", "purpose": "Signpost entry turning into a sign." }
+      { "name": "transition", "value": "150ms", "purpose": "Default duration; 0ms under prefers-reduced-motion." }
     ],
-    "breakpoints": [{ "name": "rail-collapse", "value": "900px" }]
+    "breakpoints": [{ "name": "sidebar-collapse", "value": "900px" }]
   },
   "components": [
     {
       "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Main action. Yellow plate, ink text.",
+      "description": "Main action.",
       "html": "<button class=\"ds-btn\">Save changes</button>",
-      "css": ".ds-btn { height: 40px; padding: 0 16px; font: 600 15px 'Source Sans 3', system-ui, sans-serif; color: #1d1b10; background: #ffcc00; border: 1px solid transparent; border-radius: 4px; cursor: pointer; transition: background 160ms cubic-bezier(0.16,1,0.3,1); } .ds-btn:hover { background: #f2bd00; } .ds-btn:focus-visible { outline: none; box-shadow: 0 0 0 2px #1c1e1d, 0 0 0 5px #ffcc00; }"
+      "css": ".ds-btn { height: 36px; padding: 0 16px; font: 500 14px 'Inter', system-ui, sans-serif; color: #fff; background: #3e63dd; border: 1px solid transparent; border-radius: 6px; cursor: pointer; transition: background 150ms cubic-bezier(0.16,1,0.3,1); } .ds-btn:hover { background: #3358d4; } .ds-btn:focus-visible { outline: none; box-shadow: 0 0 0 2px #fff, 0 0 0 4px #3e63dd; }"
     },
     {
       "name": "Text Input",
       "kind": "input",
       "refersTo": "input",
-      "description": "Native input with strong hairline and yellow focus halo.",
+      "description": "Native input with hairline border and accent focus ring.",
       "html": "<input class=\"ds-input\" placeholder=\"jane@example.com\" />",
-      "css": ".ds-input { height: 40px; padding: 0 12px; font: 400 15px 'Source Sans 3', system-ui, sans-serif; color: #1c1e1d; background: #fcfcfb; border: 1px solid #868d89; border-radius: 4px; outline: none; } .ds-input:hover, .ds-input:focus-visible { border-color: #1c1e1d; } .ds-input:focus-visible { box-shadow: 0 0 0 3px #ffcc00; }"
+      "css": ".ds-input { height: 36px; padding: 0 12px; font: 400 14px 'Inter', system-ui, sans-serif; color: #1c2024; background: #fff; border: 1px solid #8b8d98; border-radius: 6px; outline: none; } .ds-input:hover { border-color: #60646c; } .ds-input:focus-visible { border-color: #3e63dd; box-shadow: 0 0 0 3px rgb(62 99 221 / 0.25); }"
     },
     {
-      "name": "Signpost entry",
+      "name": "Sidebar link",
       "kind": "nav",
-      "refersTo": "nav-sign-active",
-      "description": "Current section in the nav, drawn as a pointed trail sign.",
-      "html": "<a class=\"ds-sign\" href=\"#\">Buttons</a>",
-      "css": ".ds-sign { display: inline-flex; align-items: center; height: 36px; padding: 0 24px 0 12px; font: 600 15px 'Source Sans 3', system-ui, sans-serif; color: #1d1b10; background: #ffcc00; text-decoration: none; clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%); }"
+      "refersTo": "nav-item-active",
+      "description": "Current section in the sidebar.",
+      "html": "<a class=\"ds-nav\" href=\"#\">Buttons</a>",
+      "css": ".ds-nav { display: flex; align-items: center; height: 32px; padding: 0 10px; font: 500 14px 'Inter', system-ui, sans-serif; color: #3a5bc7; background: #edf2fe; border-radius: 6px; text-decoration: none; }"
     }
   ],
   "narrative": {
-    "northStar": "The Trail Sign",
-    "overview": "A component kit read at a glance, like a Swiss hiking-trail sign: one yellow-and-ink action pairing on cool stone, standard controls, tight radii, flat surfaces.",
-    "keyCharacteristics": ["Signal yellow with granite ink as the only accent", "Cool stone neutrals, granite night in dark", "One humanist sans", "Pointed sign as the signature shape"],
+    "northStar": "The Category Standard, Done Properly",
+    "overview": "A conventional neutral kit at Radix/Linear craft: slate grays, one blue accent, Inter, flat hairline surfaces, every state designed.",
+    "keyCharacteristics": ["One blue accent", "Slate neutrals", "Inter throughout", "Flat surfaces, modal is the only shadow"],
     "rules": [
-      { "name": "One Accent", "body": "Yellow is the only accent; red and green only carry danger and success.", "section": "colors" },
-      { "name": "Ink on Yellow", "body": "Text on yellow is always sign ink; yellow fills get an ink edge on light surfaces.", "section": "colors" },
-      { "name": "Flat by Default", "body": "Only the modal casts a shadow.", "section": "elevation" }
+      { "name": "One Accent", "body": "Blue is the only accent; red and green carry meaning.", "section": "colors" },
+      { "name": "Soft for Secondary", "body": "Secondary emphasis is a soft accent tint with accent text.", "section": "colors" },
+      { "name": "Flat by Default", "body": "Only the modal casts a real shadow.", "section": "elevation" }
     ],
     "dos": ["Re-theme through --ui-* light-dark() tokens", "Design every state", "Respect reduced motion"],
     "donts": ["Second accent, gradients, glass", "Uppercase eyebrow captions", "Side stripes on containers", "Emoji as icons"]

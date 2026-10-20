@@ -172,7 +172,7 @@ export class UiCellDef<T = any> {
     :host {
       display: block;
       font-family: var(--ui-font);
-      font-size: 15px;
+      font-size: 14px;
       color: var(--ui-text);
       border: 1px solid var(--ui-border);
       border-radius: var(--ui-radius-lg);
@@ -193,7 +193,7 @@ export class UiCellDef<T = any> {
     table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
     th, td { padding: 11px 16px; text-align: left; border-bottom: 1px solid var(--ui-border); white-space: nowrap; }
     :host([data-dense]) th, :host([data-dense]) td { padding: 6px 12px; }
-    th { height: 40px; box-sizing: border-box; padding-top: 0; padding-bottom: 0; font-size: 14px; font-weight: 600; color: var(--ui-text-muted); background: var(--ui-surface-muted); border-bottom-color: var(--ui-border-strong); }
+    th { height: 40px; box-sizing: border-box; padding-top: 0; padding-bottom: 0; font-size: 13px; font-weight: 500; color: var(--ui-text-muted); background: var(--ui-surface-muted); }
     :host([data-dense]) th { height: 34px; }
     [data-align='center'] { text-align: center; }
     [data-align='end'] { text-align: right; }
@@ -214,12 +214,12 @@ export class UiCellDef<T = any> {
     .sort svg path { opacity: 0.3; transition: opacity var(--ui-transition); }
     .sort svg[data-dir='asc'] .up, .sort svg[data-dir='desc'] .down { opacity: 1; }
     .sort svg[data-dir='asc'] .down, .sort svg[data-dir='desc'] .up { opacity: 0; }
-    .pager { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 8px 12px 8px 16px; border-top: 1px solid var(--ui-border-strong); background: var(--ui-surface); }
-    .range { font-size: 14px; color: var(--ui-text-muted); font-variant-numeric: tabular-nums; }
+    .pager { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 8px 12px 8px 16px; border-top: 1px solid var(--ui-border); background: var(--ui-surface); }
+    .range { font-size: 13px; color: var(--ui-text-muted); font-variant-numeric: tabular-nums; }
     .pages { display: flex; gap: 4px; }
-    .pages button { box-sizing: border-box; min-width: 32px; height: 32px; padding: 0 8px; display: grid; place-items: center; border: 1px solid transparent; border-radius: var(--ui-radius); background: transparent; font: inherit; font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ui-text); cursor: pointer; transition: background var(--ui-transition), border-color var(--ui-transition); }
+    .pages button { box-sizing: border-box; min-width: 32px; height: 32px; padding: 0 8px; display: grid; place-items: center; border: 1px solid transparent; border-radius: var(--ui-radius); background: transparent; font: inherit; font-size: 13px; font-weight: 500; font-variant-numeric: tabular-nums; color: var(--ui-text); cursor: pointer; transition: background var(--ui-transition), border-color var(--ui-transition); }
     .pages button:hover:not(:disabled) { background: var(--ui-surface-hover); }
-    .pages button.current, .pages button.current:hover { background: var(--ui-primary); border-color: var(--ui-primary-edge); color: var(--ui-on-primary); }
+    .pages button.current, .pages button.current:hover { background: var(--ui-primary-soft); color: var(--ui-primary-text); }
     .pages button:disabled { color: var(--ui-text-disabled); cursor: not-allowed; }
     .pages button:focus-visible { outline: none; box-shadow: var(--ui-focus-ring); }
     .pages svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
