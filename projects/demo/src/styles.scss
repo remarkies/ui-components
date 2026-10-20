@@ -1,9 +1,25 @@
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+  scrollbar-color: var(--ui-border-strong) var(--ui-bg);
+}
 body {
   margin: 0;
   font-family: var(--ui-font);
+  font-size: 14px;
+  font-feature-settings: 'cv11', 'ss01';
   background: var(--ui-bg);
   color: var(--ui-text);
   -webkit-font-smoothing: antialiased;
+}
+::selection { background: color-mix(in srgb, var(--ui-primary) 25%, transparent); }
+a { color: var(--ui-primary-text); text-underline-offset: 3px; }
+h4 { margin: 20px 0 4px; font-size: 15px; font-weight: 600; }
+
+@media (max-width: 900px) {
+  html { scroll-padding-top: 112px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }

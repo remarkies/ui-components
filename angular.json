@@ -78,6 +78,7 @@
               }
             ],
             "styles": [
+              "@fontsource-variable/inter/wght.css",
               "projects/ui/styles/theme.css",
               "projects/demo/src/styles.scss"
             ]

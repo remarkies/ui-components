@@ -2,96 +2,68 @@
  * UI theme: design tokens and global element styles.
  * Include once in your app (angular.json "styles" or a global stylesheet).
  * Override any --ui-* variable on :root (or any subtree) to re-theme.
+ *
+ * Every color is a light-dark() pair: the theme follows the OS setting, and
+ * <html data-theme="light|dark"> forces one.
  */
 :root {
-  --ui-font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --ui-font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  color-scheme: light dark;
 
-  --ui-primary: #4f46e5;
-  --ui-primary-hover: #4338ca;
-  --ui-primary-soft: #eef2ff;
+  --ui-font: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --ui-font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
+
+  /* Accent: one blue, used for primary actions, selection and focus only. */
+  --ui-primary: light-dark(#3e63dd, #3e63dd);
+  --ui-primary-hover: light-dark(#3358d4, #5472e4);
+  --ui-primary-soft: light-dark(#edf2fe, rgb(62 99 221 / 0.2));
+  /* Accent-colored text on soft or neutral surfaces. */
+  --ui-primary-text: light-dark(#3a5bc7, #9eb1ff);
   --ui-on-primary: #ffffff;
+  /* Border drawn around accent fills (checked controls, current page). */
+  --ui-primary-edge: var(--ui-primary);
 
-  --ui-danger: #dc2626;
-  --ui-danger-hover: #b91c1c;
-  --ui-danger-soft: #fef2f2;
+  --ui-danger: light-dark(#ce2c31, #e5484d);
+  --ui-danger-hover: light-dark(#b8262b, #ec5d5e);
+  --ui-danger-soft: light-dark(#ffebec, rgb(229 72 77 / 0.16));
   --ui-on-danger: #ffffff;
 
-  --ui-success: #16a34a;
+  --ui-success: light-dark(#18794e, #3dd68c);
+  --ui-success-soft: light-dark(#e6f6eb, rgb(61 214 140 / 0.14));
 
-  --ui-bg: #f8fafc;
-  --ui-surface: #ffffff;
-  --ui-surface-muted: #f1f5f9;
-  --ui-surface-hover: #f1f5f9;
-  --ui-border: #e2e8f0;
-  --ui-border-strong: #cbd5e1;
-  --ui-text: #0f172a;
-  --ui-text-muted: #64748b;
-  --ui-text-disabled: #94a3b8;
+  /* Slate neutrals, tinted slightly blue. */
+  --ui-bg: light-dark(#f9f9fb, #111113);
+  --ui-surface: light-dark(#ffffff, #18191b);
+  /* Floating surfaces (modal) sit one step above the page surface. */
+  --ui-surface-raised: light-dark(#ffffff, #212225);
+  --ui-surface-muted: light-dark(#f9f9fb, #1d1e21);
+  --ui-surface-hover: light-dark(#f0f0f3, #26282c);
+  --ui-border: light-dark(#e0e1e6, #2e3135);
+  --ui-border-strong: light-dark(#8b8d98, #696e77);
+  --ui-text: light-dark(#1c2024, #edeef0);
+  --ui-text-muted: light-dark(#60646c, #b0b4ba);
+  --ui-text-disabled: light-dark(#b0b4ba, #5a6169);
 
-  --ui-radius-sm: 6px;
-  --ui-radius: 8px;
-  --ui-radius-lg: 12px;
-  --ui-focus-ring: 0 0 0 3px color-mix(in srgb, var(--ui-primary) 35%, transparent);
-  --ui-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.06);
-  --ui-shadow-lg: 0 20px 50px -12px rgb(15 23 42 / 0.35);
-  --ui-backdrop: rgb(15 23 42 / 0.5);
+  --ui-radius-sm: 4px;
+  --ui-radius: 6px;
+  --ui-radius-lg: 8px;
+  --ui-focus-ring: 0 0 0 2px var(--ui-surface), 0 0 0 4px var(--ui-primary);
+  --ui-shadow-sm: 0 1px 2px light-dark(rgb(28 32 36 / 0.06), rgb(0 0 0 / 0.3));
+  --ui-shadow-lg: 0 16px 40px -12px light-dark(rgb(28 32 36 / 0.25), rgb(0 0 0 / 0.6)),
+    0 2px 6px light-dark(rgb(28 32 36 / 0.06), rgb(0 0 0 / 0.3));
+  --ui-backdrop: light-dark(rgb(28 32 36 / 0.4), rgb(0 0 0 / 0.7));
 
   --ui-control-h-sm: 32px;
-  --ui-control-h: 40px;
-  --ui-control-h-lg: 48px;
-  --ui-transition: 150ms ease;
-
-  color-scheme: light;
+  --ui-control-h: 36px;
+  --ui-control-h-lg: 44px;
+  --ui-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ui-transition: 150ms var(--ui-ease);
 }
 
-:root[data-theme='dark'] {
-  --ui-primary: #818cf8;
-  --ui-primary-hover: #a5b4fc;
-  --ui-primary-soft: rgb(129 140 248 / 0.15);
-  --ui-on-primary: #0b1020;
-  --ui-danger: #f87171;
-  --ui-danger-hover: #fca5a5;
-  --ui-danger-soft: rgb(248 113 113 / 0.12);
-  --ui-on-danger: #1a0606;
-  --ui-success: #4ade80;
-  --ui-bg: #0b1020;
-  --ui-surface: #121a2e;
-  --ui-surface-muted: #1a2340;
-  --ui-surface-hover: #1e2948;
-  --ui-border: #263152;
-  --ui-border-strong: #34416a;
-  --ui-text: #e2e8f0;
-  --ui-text-muted: #94a3b8;
-  --ui-text-disabled: #55627f;
-  --ui-backdrop: rgb(2 6 23 / 0.7);
-  color-scheme: dark;
-}
+:root[data-theme='light'] { color-scheme: light; }
+:root[data-theme='dark'] { color-scheme: dark; }
 
-/* Follow the OS setting unless the app forces a theme with data-theme="light". */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    --ui-primary: #818cf8;
-    --ui-primary-hover: #a5b4fc;
-    --ui-primary-soft: rgb(129 140 248 / 0.15);
-    --ui-on-primary: #0b1020;
-    --ui-danger: #f87171;
-    --ui-danger-hover: #fca5a5;
-    --ui-danger-soft: rgb(248 113 113 / 0.12);
-    --ui-on-danger: #1a0606;
-    --ui-success: #4ade80;
-    --ui-bg: #0b1020;
-    --ui-surface: #121a2e;
-    --ui-surface-muted: #1a2340;
-    --ui-surface-hover: #1e2948;
-    --ui-border: #263152;
-    --ui-border-strong: #34416a;
-    --ui-text: #e2e8f0;
-    --ui-text-muted: #94a3b8;
-    --ui-text-disabled: #55627f;
-    --ui-backdrop: rgb(2 6 23 / 0.7);
-    color-scheme: dark;
-  }
+@media (prefers-reduced-motion: reduce) {
+  :root { --ui-transition: 0ms linear; }
 }
 
 /* ---------- Text inputs, textarea, select (uiInput directive) ---------- */
@@ -104,30 +76,36 @@
   font-family: var(--ui-font);
   font-size: 14px;
   color: var(--ui-text);
+  caret-color: var(--ui-text);
   background: var(--ui-surface);
   border: 1px solid var(--ui-border-strong);
   border-radius: var(--ui-radius);
   outline: none;
-  transition: border-color var(--ui-transition), box-shadow var(--ui-transition);
+  transition: border-color var(--ui-transition), box-shadow var(--ui-transition), background var(--ui-transition);
 }
-.ui-input::placeholder { color: var(--ui-text-disabled); }
+.ui-input::placeholder { color: var(--ui-text-disabled); opacity: 1; }
+.ui-input::selection { background: color-mix(in srgb, var(--ui-primary) 25%, transparent); }
 .ui-input:hover:not(:disabled) { border-color: var(--ui-text-muted); }
-.ui-input:focus-visible { border-color: var(--ui-primary); box-shadow: var(--ui-focus-ring); }
-.ui-input:disabled { color: var(--ui-text-disabled); background: var(--ui-surface-muted); cursor: not-allowed; }
+.ui-input:focus-visible { border-color: var(--ui-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ui-primary) 25%, transparent); }
+.ui-input:disabled { color: var(--ui-text-disabled); background: var(--ui-surface-muted); border-color: var(--ui-border); cursor: not-allowed; }
 .ui-input[aria-invalid='true'] { border-color: var(--ui-danger); }
-.ui-input[aria-invalid='true']:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--ui-danger) 30%, transparent); }
+.ui-input[aria-invalid='true']:hover:not(:disabled) { border-color: var(--ui-danger); }
+.ui-input[aria-invalid='true']:focus-visible { border-color: var(--ui-danger); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ui-danger) 35%, transparent); }
 .ui-input[data-size='sm'] { min-height: var(--ui-control-h-sm); font-size: 13px; padding: 0 10px; }
-.ui-input[data-size='lg'] { min-height: var(--ui-control-h-lg); font-size: 16px; padding: 0 14px; }
-textarea.ui-input { padding: 10px 12px; min-height: 88px; resize: vertical; line-height: 1.5; }
+.ui-input[data-size='lg'] { min-height: var(--ui-control-h-lg); font-size: 15px; padding: 0 14px; }
+input.ui-input[type='number'] { font-variant-numeric: tabular-nums; }
+textarea.ui-input { padding: 9px 12px; min-height: 96px; resize: vertical; line-height: 1.5; }
 select.ui-input {
   appearance: none;
   padding-right: 36px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2380838d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 12px center;
   cursor: pointer;
 }
-select.ui-input[multiple] { background-image: none; padding: 6px; min-height: 96px; }
+select.ui-input[multiple] { background-image: none; padding: 4px; min-height: 104px; }
+select.ui-input[multiple] option { padding: 5px 8px; border-radius: var(--ui-radius-sm); }
+select.ui-input[multiple] option:checked { background: var(--ui-primary) linear-gradient(var(--ui-primary), var(--ui-primary)); color: var(--ui-on-primary); }
 input.ui-input[type='color'] { width: 56px; padding: 4px; cursor: pointer; }
 input.ui-input[type='color']::-webkit-color-swatch-wrapper { padding: 0; }
 input.ui-input[type='color']::-webkit-color-swatch { border: none; border-radius: var(--ui-radius-sm); }
@@ -135,10 +113,6 @@ input.ui-input[type='date'],
 input.ui-input[type='time'],
 input.ui-input[type='datetime-local'],
 input.ui-input[type='month'],
-input.ui-input[type='week'] { cursor: text; }
-input.ui-input::-webkit-calendar-picker-indicator { cursor: pointer; opacity: 0.6; }
-:root[data-theme='dark'] input.ui-input::-webkit-calendar-picker-indicator { filter: invert(1); }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) input.ui-input::-webkit-calendar-picker-indicator { filter: invert(1); }
-}
+input.ui-input[type='week'] { cursor: text; font-variant-numeric: tabular-nums; }
+input.ui-input::-webkit-calendar-picker-indicator { cursor: pointer; opacity: 0.65; }
 input.ui-input[type='search']::-webkit-search-cancel-button { cursor: pointer; }

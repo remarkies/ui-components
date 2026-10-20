@@ -1,9 +1,9 @@
 <header class="topbar">
-  <div class="brand">
-    <span class="logo" aria-hidden="true"></span>
-    <span>UI Components</span>
-    <span class="version">Angular 21</span>
-  </div>
+  <a class="brand" href="#top">
+    <svg class="mark" viewBox="0 0 22 22" aria-hidden="true"><rect width="22" height="22" rx="6" /><path d="M7 7.5v4.2a4 4 0 0 0 8 0V7.5" /></svg>
+    <span class="brand-name">UI Components</span>
+  </a>
+  <span class="meta">Angular 21</span>
   <button uiButton variant="ghost" iconOnly [attr.aria-label]="dark() ? 'Switch to light theme' : 'Switch to dark theme'" (click)="toggleTheme()">
     @if (dark()) {
       <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>
@@ -14,213 +14,283 @@
 </header>
 
 <div class="layout">
-  <nav class="sidebar" aria-label="Components">
-    @for (s of sections; track s.id) {
-      <a [href]="'#' + s.id">{{ s.label }}</a>
-    }
+  <nav class="sidenav" aria-label="Components">
+    <ul>
+      @for (s of sections; track s.id) {
+        <li>
+          <a [href]="'#' + s.id" [class.here]="active() === s.id" [attr.aria-current]="active() === s.id ? 'location' : null">
+            {{ s.label }}
+          </a>
+        </li>
+      }
+    </ul>
   </nav>
 
-  <main>
+  <main id="top">
     <section class="intro">
-      <h1>Component library</h1>
+      <h1>Every common control, built on native elements</h1>
       <p>
-        Standalone, signal-based Angular components with custom styling. Every component is themed through
+        Standalone, signal-based Angular components with their own styling. Each one is themed through
         <code>--ui-*</code> CSS variables and works with reactive forms, template forms and two-way bindings.
       </p>
+      <div class="code">
+        <div class="code-bar">
+          <span>Use it</span>
+          <button uiButton variant="ghost" size="sm" (click)="copy('setup')">{{ copied() === 'setup' ? 'Copied' : 'Copy' }}</button>
+        </div>
+        <pre><code>{{ snippets.setup }}</code></pre>
+      </div>
     </section>
 
     <!-- Buttons -->
-    <section id="buttons" class="card">
-      <h2>Buttons</h2>
-      <p class="lead">Applied to native <code>&lt;button&gt;</code> and <code>&lt;a&gt;</code> elements with the <code>uiButton</code> attribute.</p>
+    <section id="buttons" class="section">
+      <header class="section-head">
+        <h2>Buttons</h2>
+        <p class="lead">Applied to native <code>&lt;button&gt;</code> and <code>&lt;a&gt;</code> elements with the <code>uiButton</code> attribute.</p>
+      </header>
 
-      <h3>Variants</h3>
-      <div class="row">
-        <button uiButton>Primary</button>
-        <button uiButton variant="secondary">Secondary</button>
-        <button uiButton variant="outline">Outline</button>
-        <button uiButton variant="ghost">Ghost</button>
-        <button uiButton variant="danger">Danger</button>
-        <a uiButton variant="outline" href="#table">Link button</a>
+      <div class="specimen">
+        <div class="example">
+          <h3>Variants</h3>
+          <div class="row">
+            <button uiButton>Primary</button>
+            <button uiButton variant="secondary">Secondary</button>
+            <button uiButton variant="outline">Outline</button>
+            <button uiButton variant="ghost">Ghost</button>
+            <button uiButton variant="danger">Danger</button>
+          </div>
+        </div>
+
+        <div class="example">
+          <h3>Sizes</h3>
+          <div class="row">
+            <button uiButton size="sm">Small</button>
+            <button uiButton>Medium</button>
+            <button uiButton size="lg">Large</button>
+          </div>
+        </div>
+
+        <div class="example">
+          <h3>States</h3>
+          <div class="row">
+            <button uiButton [loading]="saving()" (click)="save()">{{ saving() ? 'Saving…' : 'Save changes' }}</button>
+            <button uiButton disabled>Disabled</button>
+            <button uiButton variant="outline" loading>Loading</button>
+            <a uiButton variant="outline" href="#table">Link (&lt;a&gt;)</a>
+            <button uiButton variant="outline" iconOnly aria-label="Add">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+            </button>
+            <button uiButton variant="secondary">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0-4 4m4-4 4 4M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" /></svg>
+              Upload
+            </button>
+          </div>
+          <div class="row narrow">
+            <button uiButton block>Block button</button>
+          </div>
+        </div>
       </div>
 
-      <h3>Sizes</h3>
-      <div class="row">
-        <button uiButton size="sm">Small</button>
-        <button uiButton>Medium</button>
-        <button uiButton size="lg">Large</button>
+      <div class="code">
+        <div class="code-bar">
+          <span>Usage</span>
+          <button uiButton variant="ghost" size="sm" (click)="copy('buttons')">{{ copied() === 'buttons' ? 'Copied' : 'Copy' }}</button>
+        </div>
+        <pre><code>{{ snippets.buttons }}</code></pre>
       </div>
-
-      <h3>States</h3>
-      <div class="row">
-        <button uiButton [loading]="saving()" (click)="save()">{{ saving() ? 'Saving…' : 'Click to save' }}</button>
-        <button uiButton disabled>Disabled</button>
-        <button uiButton variant="outline" disabled>Disabled</button>
-        <button uiButton variant="outline" iconOnly aria-label="Add">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
-        </button>
-        <button uiButton variant="secondary">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0-4 4m4-4 4 4M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" /></svg>
-          With icon
-        </button>
-      </div>
-      <div class="row narrow">
-        <button uiButton block>Block button</button>
-      </div>
-      <pre><code>{{ snippets.buttons }}</code></pre>
     </section>
 
     <!-- Text inputs -->
-    <section id="inputs" class="card">
-      <h2>Text inputs</h2>
-      <p class="lead">The <code>uiInput</code> directive styles any native input, textarea or select. Wrap it in <code>ui-form-field</code> for a label, hint and error.</p>
+    <section id="inputs" class="section">
+      <header class="section-head">
+        <h2>Text inputs</h2>
+        <p class="lead">The <code>uiInput</code> directive styles any native input, textarea or select. Wrap it in <code>ui-form-field</code> for a label, hint and error.</p>
+      </header>
 
-      <h3>Every native input type</h3>
-      <div class="grid">
-        @for (t of nativeTypes; track t.type) {
-          <ui-form-field [label]="t.label" [hint]="'type=&quot;' + t.type + '&quot;'">
-            <input uiInput [type]="t.type" [placeholder]="t.placeholder" />
-          </ui-form-field>
-        }
-        <ui-form-field label="Color" [hint]="color">
-          <input uiInput type="color" [(ngModel)]="color" />
-        </ui-form-field>
-      </div>
-
-      <h3>Textarea and select</h3>
-      <div class="grid">
-        <ui-form-field label="Message" hint="Resizable vertically">
-          <textarea uiInput placeholder="Write something…"></textarea>
-        </ui-form-field>
-        <ui-form-field label="Country">
-          <select uiInput>
-            <option value="" disabled selected>Choose a country</option>
-            <option>Switzerland</option>
-            <option>Germany</option>
-            <option>Austria</option>
-            <option>France</option>
-            <option>Italy</option>
-          </select>
-        </ui-form-field>
-        <ui-form-field label="Languages" hint="Hold Ctrl / Cmd to pick several">
-          <select uiInput multiple>
-            <option>TypeScript</option>
-            <option>Rust</option>
-            <option>Go</option>
-            <option>Python</option>
-          </select>
-        </ui-form-field>
-      </div>
-
-      <h3>Prefix, suffix and states</h3>
-      <div class="grid">
-        <ui-form-field label="Search">
-          <svg uiPrefix class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
-          <input uiInput type="search" placeholder="Search components" />
-        </ui-form-field>
-        <ui-form-field label="Password" hint="At least 8 characters">
-          <input uiInput [type]="showPassword() ? 'text' : 'password'" value="correct-horse" />
-          <button uiSuffix uiButton variant="ghost" size="sm" iconOnly type="button"
-            [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'"
-            (click)="showPassword.set(!showPassword())">
-            @if (showPassword()) {
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 5.1A9.8 9.8 0 0 1 12 5c6 0 9.5 7 9.5 7a17 17 0 0 1-3.1 3.9M6.6 6.6A17 17 0 0 0 2.5 12S6 19 12 19a9.6 9.6 0 0 0 5.4-1.6" /></svg>
-            } @else {
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12S6 5 12 5s9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7Z" /><circle cx="12" cy="12" r="3" /></svg>
+      <div class="specimen">
+        <div class="example">
+          <h3>Every native input type</h3>
+          <div class="grid">
+            @for (t of nativeTypes; track t.type) {
+              <ui-form-field [label]="t.label" [hint]="'type=&quot;' + t.type + '&quot;'">
+                <input uiInput [type]="t.type" [placeholder]="t.placeholder" />
+              </ui-form-field>
             }
-          </button>
-        </ui-form-field>
-        <ui-form-field label="Amount">
-          <span uiPrefix>CHF</span>
-          <input uiInput type="number" placeholder="0.00" style="padding-left: 48px" />
-        </ui-form-field>
-        <ui-form-field label="Disabled">
-          <input uiInput value="Can't touch this" disabled />
-        </ui-form-field>
-        <ui-form-field label="Invalid" error="Username is already taken">
-          <input uiInput value="admin" invalid />
-        </ui-form-field>
-        <ui-form-field label="Sizes">
-          <div class="stack">
-            <input uiInput size="sm" placeholder="Small" />
-            <input uiInput placeholder="Medium" />
-            <input uiInput size="lg" placeholder="Large" />
+            <ui-form-field label="Color" [hint]="color">
+              <input uiInput type="color" [(ngModel)]="color" />
+            </ui-form-field>
           </div>
-        </ui-form-field>
+        </div>
+
+        <div class="example">
+          <h3>Textarea and select</h3>
+          <div class="grid">
+            <ui-form-field label="Message" hint="Resizable vertically">
+              <textarea uiInput placeholder="Write something…"></textarea>
+            </ui-form-field>
+            <ui-form-field label="Country">
+              <select uiInput>
+                <option value="" disabled selected>Choose a country</option>
+                <option>Switzerland</option>
+                <option>Germany</option>
+                <option>Austria</option>
+                <option>France</option>
+                <option>Italy</option>
+              </select>
+            </ui-form-field>
+            <ui-form-field label="Languages" hint="Hold Ctrl or Cmd to pick several">
+              <select uiInput multiple>
+                <option>TypeScript</option>
+                <option>Rust</option>
+                <option>Go</option>
+                <option>Python</option>
+              </select>
+            </ui-form-field>
+          </div>
+        </div>
+
+        <div class="example">
+          <h3>Prefix, suffix and states</h3>
+          <div class="grid">
+            <ui-form-field label="Search">
+              <svg uiPrefix class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+              <input uiInput type="search" placeholder="Search components" />
+            </ui-form-field>
+            <ui-form-field label="Password" hint="At least 8 characters">
+              <input uiInput [type]="showPassword() ? 'text' : 'password'" value="correct-horse" />
+              <button uiSuffix uiButton variant="ghost" size="sm" iconOnly type="button"
+                [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'"
+                (click)="showPassword.set(!showPassword())">
+                @if (showPassword()) {
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 5.1A9.8 9.8 0 0 1 12 5c6 0 9.5 7 9.5 7a17 17 0 0 1-3.1 3.9M6.6 6.6A17 17 0 0 0 2.5 12S6 19 12 19a9.6 9.6 0 0 0 5.4-1.6" /></svg>
+                } @else {
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12S6 5 12 5s9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7Z" /><circle cx="12" cy="12" r="3" /></svg>
+                }
+              </button>
+            </ui-form-field>
+            <ui-form-field label="Amount">
+              <span uiPrefix>CHF</span>
+              <input uiInput type="number" placeholder="0.00" style="padding-left: 50px" />
+            </ui-form-field>
+            <ui-form-field label="Disabled">
+              <input uiInput value="Read only for now" disabled />
+            </ui-form-field>
+            <ui-form-field label="Invalid" error="Username is already taken">
+              <input uiInput value="admin" invalid />
+            </ui-form-field>
+            <ui-form-field label="Sizes">
+              <div class="stack">
+                <input uiInput size="sm" placeholder="Small" aria-label="Small input" />
+                <input uiInput placeholder="Medium" aria-label="Medium input" />
+                <input uiInput size="lg" placeholder="Large" aria-label="Large input" />
+              </div>
+            </ui-form-field>
+          </div>
+        </div>
       </div>
-      <pre><code>{{ snippets.inputs }}</code></pre>
+
+      <div class="code">
+        <div class="code-bar">
+          <span>Usage</span>
+          <button uiButton variant="ghost" size="sm" (click)="copy('inputs')">{{ copied() === 'inputs' ? 'Copied' : 'Copy' }}</button>
+        </div>
+        <pre><code>{{ snippets.inputs }}</code></pre>
+      </div>
     </section>
 
     <!-- Selection controls -->
-    <section id="selection" class="card">
-      <h2>Selection controls</h2>
-      <p class="lead">Checkbox, radio, switch and slider. All implement <code>ControlValueAccessor</code> and expose two-way <code>model()</code> bindings.</p>
+    <section id="selection" class="section">
+      <header class="section-head">
+        <h2>Selection controls</h2>
+        <p class="lead">Checkbox, radio, switch and slider. All implement <code>ControlValueAccessor</code> and expose two-way <code>model()</code> bindings.</p>
+      </header>
 
-      <div class="grid">
-        <div class="group">
-          <h3>Checkbox</h3>
-          <ui-checkbox [checked]="allToppings()" [indeterminate]="someToppings()" (checkedChange)="setAllToppings($event)">
-            <strong>All toppings</strong>
-          </ui-checkbox>
-          <div class="indent">
-            @for (t of toppings(); track t.name; let i = $index) {
-              <ui-checkbox [checked]="t.checked" (checkedChange)="setTopping(i, $event)">{{ t.name }}</ui-checkbox>
-            }
+      <div class="specimen">
+        <div class="grid wide">
+          <div class="group">
+            <h3>Checkbox</h3>
+            <ui-checkbox [checked]="allToppings()" [indeterminate]="someToppings()" (checkedChange)="setAllToppings($event)">
+              <strong>All toppings</strong>
+            </ui-checkbox>
+            <div class="indent">
+              @for (t of toppings(); track t.name; let i = $index) {
+                <ui-checkbox [checked]="t.checked" (checkedChange)="setTopping(i, $event)">{{ t.name }}</ui-checkbox>
+              }
+            </div>
+            <ui-checkbox disabled>Disabled</ui-checkbox>
+            <ui-checkbox disabled [checked]="true">Disabled checked</ui-checkbox>
           </div>
-          <ui-checkbox disabled>Disabled</ui-checkbox>
-          <ui-checkbox disabled [checked]="true">Disabled checked</ui-checkbox>
-        </div>
 
-        <div class="group">
-          <h3>Radio</h3>
-          <ui-radio-group label="Plan" [(value)]="plan">
-            <ui-radio value="free" description="For side projects">Free</ui-radio>
-            <ui-radio value="pro" description="For growing teams">Pro</ui-radio>
-            <ui-radio value="team" description="Contact sales" disabled>Enterprise</ui-radio>
-          </ui-radio-group>
-          <ui-radio-group label="Size" direction="horizontal" [(value)]="size">
-            <ui-radio value="s">S</ui-radio>
-            <ui-radio value="m">M</ui-radio>
-            <ui-radio value="l">L</ui-radio>
-            <ui-radio value="xl">XL</ui-radio>
-          </ui-radio-group>
-          <p class="muted">Plan: {{ plan() }} · Size: {{ size() }}</p>
-        </div>
+          <div class="group">
+            <h3>Radio</h3>
+            <ui-radio-group label="Plan" [(value)]="plan">
+              <ui-radio value="free" description="For side projects">Free</ui-radio>
+              <ui-radio value="pro" description="For growing teams">Pro</ui-radio>
+              <ui-radio value="team" description="Contact sales" disabled>Enterprise</ui-radio>
+            </ui-radio-group>
+            <ui-radio-group label="Size" direction="horizontal" [(value)]="size">
+              <ui-radio value="s">S</ui-radio>
+              <ui-radio value="m">M</ui-radio>
+              <ui-radio value="l">L</ui-radio>
+              <ui-radio value="xl">XL</ui-radio>
+            </ui-radio-group>
+            <p class="readout">Plan <b>{{ plan() }}</b>, size <b>{{ size() }}</b></p>
+          </div>
 
-        <div class="group">
-          <h3>Switch</h3>
-          <ui-switch [(checked)]="notifications">Push notifications</ui-switch>
-          <ui-switch [(checked)]="marketing">Marketing emails</ui-switch>
-          <ui-switch disabled [checked]="true">Disabled</ui-switch>
-          <p class="muted">Notifications {{ notifications() ? 'on' : 'off' }}, marketing {{ marketing() ? 'on' : 'off' }}</p>
-        </div>
+          <div class="group">
+            <h3>Switch</h3>
+            <ui-switch [(checked)]="notifications">Push notifications</ui-switch>
+            <ui-switch [(checked)]="marketing">Marketing emails</ui-switch>
+            <ui-switch disabled [checked]="true">Disabled</ui-switch>
+            <p class="readout">Notifications <b>{{ notifications() ? 'on' : 'off' }}</b>, marketing <b>{{ marketing() ? 'on' : 'off' }}</b></p>
+          </div>
 
-        <div class="group">
-          <h3>Slider</h3>
-          <ui-slider label="Volume" showValue [format]="formatPercent" [(value)]="volume" />
-          <ui-slider label="Budget" showValue [min]="0" [max]="1000" [step]="50" [format]="formatChf" [(value)]="price" />
-          <ui-slider label="Disabled" disabled [value]="30" />
+          <div class="group">
+            <h3>Slider</h3>
+            <ui-slider label="Volume" showValue [format]="formatPercent" [(value)]="volume" />
+            <ui-slider label="Budget" showValue [min]="0" [max]="1000" [step]="50" [format]="formatChf" [(value)]="price" />
+            <ui-slider label="Disabled" disabled [value]="30" />
+          </div>
         </div>
       </div>
-      <pre><code>{{ snippets.selection }}</code></pre>
+
+      <div class="code">
+        <div class="code-bar">
+          <span>Usage</span>
+          <button uiButton variant="ghost" size="sm" (click)="copy('selection')">{{ copied() === 'selection' ? 'Copied' : 'Copy' }}</button>
+        </div>
+        <pre><code>{{ snippets.selection }}</code></pre>
+      </div>
     </section>
 
     <!-- File upload -->
-    <section id="files" class="card">
-      <h2>File upload</h2>
-      <p class="lead">Click or drag files onto the drop zone. The value is a <code>File[]</code>.</p>
-      <div class="narrow">
-        <ui-file-input accept="image/*,.pdf" multiple hint="PNG, JPG or PDF up to 10 MB" [(files)]="files" />
+    <section id="files" class="section">
+      <header class="section-head">
+        <h2>File upload</h2>
+        <p class="lead">Click or drag files onto the drop zone. The value is a <code>File[]</code>.</p>
+      </header>
+      <div class="specimen">
+        <div class="narrow">
+          <ui-file-input accept="image/*,.pdf" multiple hint="PNG, JPG or PDF up to 10 MB" [(files)]="files" />
+          <p class="readout">{{ files().length === 1 ? '1 file' : files().length + ' files' }} selected</p>
+        </div>
       </div>
-      <p class="muted">{{ files().length }} file(s) selected</p>
-      <pre><code>{{ snippets.files }}</code></pre>
+      <div class="code">
+        <div class="code-bar">
+          <span>Usage</span>
+          <button uiButton variant="ghost" size="sm" (click)="copy('files')">{{ copied() === 'files' ? 'Copied' : 'Copy' }}</button>
+        </div>
+        <pre><code>{{ snippets.files }}</code></pre>
+      </div>
     </section>
 
     <!-- Form example -->
-    <section id="form" class="card">
-      <h2>Form example</h2>
-      <p class="lead">A reactive form using every control. Submit it empty to see validation.</p>
-      <div class="form-layout">
+    <section id="form" class="section">
+      <header class="section-head">
+        <h2>Form example</h2>
+        <p class="lead">A reactive form using every control. Submit it empty to see validation.</p>
+      </header>
+      <div class="specimen form-layout">
         <form class="form" [formGroup]="signup" (ngSubmit)="submit()" novalidate>
           <div class="grid two">
             <ui-form-field label="Full name" required [error]="errorFor('name')">
@@ -256,7 +326,7 @@
           <div>
             <ui-checkbox formControlName="terms">I accept the terms and conditions</ui-checkbox>
             @if (signup.controls.terms.invalid && signup.controls.terms.touched) {
-              <p class="error">You need to accept the terms</p>
+              <p class="ui-form-field__error terms-error" role="alert">Accept the terms to create an account</p>
             }
           </div>
           <div class="row">
@@ -264,32 +334,50 @@
             <button uiButton variant="ghost" type="button" (click)="resetForm()">Reset</button>
           </div>
         </form>
-        <div class="output">
-          <h3>Form value</h3>
+        <aside class="output" aria-label="Form state">
+          <div class="output-head">
+            <h3>Form value</h3>
+            <span class="state" [attr.data-valid]="signup.valid">{{ signup.valid ? 'Valid' : 'Invalid' }}</span>
+          </div>
           <pre><code>{{ signup.getRawValue() | json }}</code></pre>
-          <p class="muted">Valid: {{ signup.valid }}</p>
           @if (submitted()) {
-            <p class="success">Submitted successfully.</p>
+            <p class="success" role="status">Account created. This demo doesn't send anything.</p>
           }
-        </div>
+        </aside>
       </div>
-      <pre><code>{{ snippets.form }}</code></pre>
+      <div class="code">
+        <div class="code-bar">
+          <span>Usage</span>
+          <button uiButton variant="ghost" size="sm" (click)="copy('form')">{{ copied() === 'form' ? 'Copied' : 'Copy' }}</button>
+        </div>
+        <pre><code>{{ snippets.form }}</code></pre>
+      </div>
     </section>
 
     <!-- Modal -->
-    <section id="modal" class="card">
-      <h2>Modal</h2>
-      <p class="lead">Built on native <code>&lt;dialog&gt;</code>: focus is trapped, Escape and backdrop clicks close it.</p>
-      <div class="row">
-        <button uiButton (click)="basicOpen.set(true)">Basic modal</button>
-        <button uiButton variant="danger" (click)="confirmOpen.set(true)">Confirm dialog</button>
-        <button uiButton variant="outline" (click)="formOpen.set(true)">Modal with form</button>
-        <button uiButton variant="ghost" (click)="largeOpen.set(true)">Large, scrolling</button>
+    <section id="modal" class="section">
+      <header class="section-head">
+        <h2>Modal</h2>
+        <p class="lead">Built on native <code>&lt;dialog&gt;</code>: focus is trapped, and Escape or a backdrop click closes it.</p>
+      </header>
+      <div class="specimen">
+        <div class="row">
+          <button uiButton (click)="basicOpen.set(true)">Basic modal</button>
+          <button uiButton variant="danger" (click)="confirmOpen.set(true)">Confirm dialog</button>
+          <button uiButton variant="outline" (click)="formOpen.set(true)">Modal with form</button>
+          <button uiButton variant="ghost" (click)="largeOpen.set(true)">Large, scrolling</button>
+        </div>
+        @if (lastAction()) {
+          <p class="readout" role="status">{{ lastAction() }}</p>
+        }
       </div>
-      @if (lastAction()) {
-        <p class="muted">{{ lastAction() }}</p>
-      }
-      <pre><code>{{ snippets.modal }}</code></pre>
+      <div class="code">
+        <div class="code-bar">
+          <span>Usage</span>
+          <button uiButton variant="ghost" size="sm" (click)="copy('modal')">{{ copied() === 'modal' ? 'Copied' : 'Copy' }}</button>
+        </div>
+        <pre><code>{{ snippets.modal }}</code></pre>
+      </div>
 
       <ui-modal [(open)]="basicOpen" title="Welcome aboard" subtitle="A simple modal with a title and footer">
         <p>Modals sit in the browser's top layer, so they always render above everything else on the page.</p>
@@ -325,14 +413,10 @@
         </div>
       </ui-modal>
 
-      <ui-modal [(open)]="largeOpen" title="Terms of service" size="lg">
-        @for (n of [1, 2, 3, 4, 5, 6, 7, 8]; track n) {
-          <h4>Section {{ n }}</h4>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante
-            dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris.
-            Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla.
-          </p>
+      <ui-modal [(open)]="largeOpen" title="Terms of use" subtitle="Sample text to show a scrolling body" size="lg">
+        @for (term of terms; track term.title) {
+          <h4>{{ term.title }}</h4>
+          <p>{{ term.body }}</p>
         }
         <div uiModalFooter>
           <button uiButton variant="outline" (click)="largeOpen.set(false)">Decline</button>
@@ -342,9 +426,11 @@
     </section>
 
     <!-- Table -->
-    <section id="table" class="card">
-      <h2>Table</h2>
-      <p class="lead">Sorting, pagination, row selection and custom cell templates.</p>
+    <section id="table" class="section">
+      <header class="section-head">
+        <h2>Table</h2>
+        <p class="lead">Sorting, pagination, row selection and custom cell templates.</p>
+      </header>
       <div class="toolbar">
         <ui-form-field class="search">
           <svg uiPrefix class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
@@ -365,11 +451,11 @@
         [pageSize]="8"
         [striped]="striped()"
         [dense]="dense()"
-        emptyText="No users match your filter"
+        emptyText="No users match this filter. Clear the search to see everyone."
       >
         <ng-template uiCell="name" let-row>
           <div class="user">
-            <span class="avatar">{{ initials(row.name) }}</span>
+            <span class="avatar" aria-hidden="true">{{ initials(row.name) }}</span>
             <div>
               <div class="user-name">{{ row.name }}</div>
               <div class="user-email">{{ row.email }}</div>
@@ -381,12 +467,21 @@
         </ng-template>
         <ng-template uiCell="joined" let-value="value">{{ $any(value) | date: 'mediumDate' }}</ng-template>
         <ng-template uiCell="actions" let-row>
-          <button uiButton variant="ghost" size="sm" (click)="removeUser(row)">Remove</button>
+          <button uiButton variant="ghost" size="sm" [attr.aria-label]="'Remove ' + row.name" (click)="removeUser(row)">Remove</button>
         </ng-template>
       </ui-table>
-      <pre><code>{{ snippets.table }}</code></pre>
+      <div class="code">
+        <div class="code-bar">
+          <span>Usage</span>
+          <button uiButton variant="ghost" size="sm" (click)="copy('table')">{{ copied() === 'table' ? 'Copied' : 'Copy' }}</button>
+        </div>
+        <pre><code>{{ snippets.table }}</code></pre>
+      </div>
     </section>
 
-    <footer class="foot">Built with Angular 21 · custom styling · no third-party UI kit</footer>
+    <footer class="foot">
+      <span>Built with Angular 21 and native elements, no third-party UI kit.</span>
+      <a href="#top">Back to top</a>
+    </footer>
   </main>
 </div>

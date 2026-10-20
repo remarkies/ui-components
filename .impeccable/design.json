@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-20T21:55:00Z",
+  "title": "Design System: UI Components",
+  "extensions": {
+    "colorMeta": {
+      "accent": { "role": "primary", "displayName": "Accent Blue", "tonalRamp": ["#edf2fe", "#d2deff", "#abbdf9", "#3e63dd", "#3358d4", "#3a5bc7"] },
+      "slate-ground": { "role": "neutral", "displayName": "Slate", "tonalRamp": ["#ffffff", "#f9f9fb", "#f0f0f3", "#e0e1e6", "#b0b4ba", "#8b8d98", "#60646c", "#1c2024"] },
+      "danger": { "role": "danger", "displayName": "Danger Red" },
+      "success": { "role": "success", "displayName": "Success Green" },
+      "night-ground": { "role": "neutral", "displayName": "Night Slate" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Demo page title only." },
+      "heading": { "displayName": "Section heading", "purpose": "Section titles." },
+      "label": { "displayName": "Label", "purpose": "Field labels, legends, table headers." }
+    },
+    "shadows": [
+      { "name": "shadow-sm", "value": "0 1px 2px rgb(28 32 36 / 0.06)", "purpose": "Thumbs only." },
+      { "name": "shadow-lg", "value": "0 16px 40px -12px rgb(28 32 36 / 0.25), 0 2px 6px rgb(28 32 36 / 0.06)", "purpose": "Modal, the only floating surface." },
+      { "name": "focus-ring", "value": "0 0 0 2px var(--ui-surface), 0 0 0 4px var(--ui-primary)", "purpose": "Keyboard focus on every interactive element." }
+    ],
+    "motion": [
+      { "name": "ease", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "All state transitions." },
+      { "name": "transition", "value": "150ms", "purpose": "Default duration; 0ms under prefers-reduced-motion." }
+    ],
+    "breakpoints": [{ "name": "sidebar-collapse", "value": "900px" }]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main action.",
+      "html": "<button class=\"ds-btn\">Save changes</button>",
+      "css": ".ds-btn { height: 36px; padding: 0 16px; font: 500 14px 'Inter', system-ui, sans-serif; color: #fff; background: #3e63dd; border: 1px solid transparent; border-radius: 6px; cursor: pointer; transition: background 150ms cubic-bezier(0.16,1,0.3,1); } .ds-btn:hover { background: #3358d4; } .ds-btn:focus-visible { outline: none; box-shadow: 0 0 0 2px #fff, 0 0 0 4px #3e63dd; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Native input with hairline border and accent focus ring.",
+      "html": "<input class=\"ds-input\" placeholder=\"jane@example.com\" />",
+      "css": ".ds-input { height: 36px; padding: 0 12px; font: 400 14px 'Inter', system-ui, sans-serif; color: #1c2024; background: #fff; border: 1px solid #8b8d98; border-radius: 6px; outline: none; } .ds-input:hover { border-color: #60646c; } .ds-input:focus-visible { border-color: #3e63dd; box-shadow: 0 0 0 3px rgb(62 99 221 / 0.25); }"
+    },
+    {
+      "name": "Sidebar link",
+      "kind": "nav",
+      "refersTo": "nav-item-active",
+      "description": "Current section in the sidebar.",
+      "html": "<a class=\"ds-nav\" href=\"#\">Buttons</a>",
+      "css": ".ds-nav { display: flex; align-items: center; height: 32px; padding: 0 10px; font: 500 14px 'Inter', system-ui, sans-serif; color: #3a5bc7; background: #edf2fe; border-radius: 6px; text-decoration: none; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Category Standard, Done Properly",
+    "overview": "A conventional neutral kit at Radix/Linear craft: slate grays, one blue accent, Inter, flat hairline surfaces, every state designed.",
+    "keyCharacteristics": ["One blue accent", "Slate neutrals", "Inter throughout", "Flat surfaces, modal is the only shadow"],
+    "rules": [
+      { "name": "One Accent", "body": "Blue is the only accent; red and green carry meaning.", "section": "colors" },
+      { "name": "Soft for Secondary", "body": "Secondary emphasis is a soft accent tint with accent text.", "section": "colors" },
+      { "name": "Flat by Default", "body": "Only the modal casts a real shadow.", "section": "elevation" }
+    ],
+    "dos": ["Re-theme through --ui-* light-dark() tokens", "Design every state", "Respect reduced motion"],
+    "donts": ["Second accent, gradients, glass", "Uppercase eyebrow captions", "Side stripes on containers", "Emoji as icons"]
+  }
+}

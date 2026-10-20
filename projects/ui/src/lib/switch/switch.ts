@@ -30,33 +30,38 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   `,
   styles: `
     :host { display: inline-flex; font-family: var(--ui-font); }
-    .root { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px; color: var(--ui-text); }
+    .root { position: relative; display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px; color: var(--ui-text); }
     .root.disabled { cursor: not-allowed; color: var(--ui-text-disabled); }
     input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
     .track {
       flex: none;
       position: relative;
-      width: 38px;
-      height: 22px;
+      box-sizing: border-box;
+      width: 36px;
+      height: 20px;
       border-radius: 999px;
-      background: var(--ui-border-strong);
-      transition: background var(--ui-transition), box-shadow var(--ui-transition);
+      background: color-mix(in srgb, var(--ui-border-strong) 55%, var(--ui-surface));
+      transition: background var(--ui-transition), border-color var(--ui-transition), box-shadow var(--ui-transition);
     }
     .thumb {
       position: absolute;
-      top: 3px;
-      left: 3px;
+      top: 2px;
+      left: 2px;
       width: 16px;
       height: 16px;
-      border-radius: 50%;
+      border-radius: 999px;
       background: #fff;
-      box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
-      transition: transform 180ms cubic-bezier(0.3, 0.7, 0.4, 1);
+      box-shadow: 0 1px 2px rgb(0 0 0 / 0.2), 0 0 0 0.5px rgb(0 0 0 / 0.06);
+      transition: transform 220ms var(--ui-ease), background var(--ui-transition), width 220ms var(--ui-ease);
     }
-    input:checked + .track { background: var(--ui-primary); }
+    .root:hover .track { background: color-mix(in srgb, var(--ui-border-strong) 75%, var(--ui-surface)); }
+    .root:active .thumb { width: 19px; }
+    input:checked + .track, .root:hover input:checked + .track { background: var(--ui-primary); }
     input:checked + .track .thumb { transform: translateX(16px); }
+    .root:active input:checked + .track .thumb { transform: translateX(13px); }
     input:focus-visible + .track { box-shadow: var(--ui-focus-ring); }
-    input:disabled + .track { opacity: 0.5; }
+    input:disabled + .track, input:disabled:checked + .track { background: var(--ui-surface-hover); }
+    input:disabled + .track .thumb { box-shadow: none; background: var(--ui-border); }
     .label:empty { display: none; }
   `,
 })

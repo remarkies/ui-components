@@ -47,8 +47,8 @@ export interface UiFormFieldControl {
   `,
   styles: `
     .ui-form-field { display: flex; flex-direction: column; gap: 6px; font-family: var(--ui-font); min-width: 0; }
-    .ui-form-field__label { font-size: 13px; font-weight: 600; color: var(--ui-text); }
-    .ui-form-field__required { color: var(--ui-danger); margin-left: 2px; }
+    .ui-form-field__label { font-size: 13px; font-weight: 500; line-height: 1.3; color: var(--ui-text); }
+    .ui-form-field__required { color: var(--ui-danger); margin-left: 3px; }
     .ui-form-field__control { position: relative; display: flex; align-items: center; }
     .ui-form-field__control > [uiPrefix],
     .ui-form-field__control > [uiSuffix] {
@@ -58,15 +58,24 @@ export interface UiFormFieldControl {
       display: inline-flex;
       align-items: center;
       color: var(--ui-text-muted);
-      font-size: 14px;
+      font-size: 13px;
     }
     .ui-form-field__control > [uiPrefix] { left: 12px; pointer-events: none; }
-    .ui-form-field__control > [uiSuffix] { right: 6px; }
-    .ui-form-field__control:has(> [uiPrefix]) > .ui-input { padding-left: 36px; }
+    .ui-form-field__control > [uiSuffix] { right: 4px; }
+    .ui-form-field__control:has(> [uiPrefix]) > .ui-input { padding-left: 38px; }
     .ui-form-field__control:has(> [uiSuffix]) > .ui-input { padding-right: 44px; }
     .ui-form-field__hint, .ui-form-field__error { margin: 0; font-size: 12px; line-height: 1.4; }
     .ui-form-field__hint { color: var(--ui-text-muted); }
-    .ui-form-field__error { color: var(--ui-danger); }
+    .ui-form-field__error { display: flex; align-items: flex-start; gap: 6px; color: var(--ui-danger); }
+    .ui-form-field__error::before {
+      content: '';
+      flex: none;
+      width: 14px;
+      height: 14px;
+      margin-top: 0.5px;
+      background: currentColor;
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round'%3E%3Ccircle cx='8' cy='8' r='6.2'/%3E%3Cpath d='M8 4.8v3.6M8 11h.01'/%3E%3C/svg%3E") center / contain no-repeat;
+    }
   `,
 })
 export class UiFormField {

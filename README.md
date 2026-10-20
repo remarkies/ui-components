@@ -30,7 +30,7 @@ The demo imports the library straight from source (`tsconfig.json` maps `ui` to 
 | Slider | `ui-slider` | `[(value)]`, `min`, `max`, `step`, `showValue`, `format`, forms |
 | File input | `ui-file-input` | Drag and drop, `multiple`, `accept`, value is `File[]`, forms |
 | Modal | `ui-modal` | Native `<dialog>`; `[(open)]`, `title`, `subtitle`, `size`, `closable`, `closeOnBackdrop`; `[uiModalFooter]` slot |
-| Table | `ui-table` | `data`, `columns`, sorting, `pageSize`, `selectable` + `[(selection)]`, `trackBy`, `striped`, `dense`, `ng-template uiCell="key"` |
+| Table | `ui-table` | `data`, `columns` (with optional `ariaLabel` for an empty header), sorting, `pageSize`, `selectable` + `[(selection)]`, `trackBy`, `striped`, `dense`, `ng-template uiCell="key"` |
 
 Every form control implements `ControlValueAccessor`, so it works with `formControlName`, `[formControl]` and `ngModel`. All components are standalone, use signals and `OnPush`, and work in zoneless apps.
 
@@ -65,14 +65,29 @@ Every form control implements `ControlValueAccessor`, so it works with `formCont
 
 ## Theming
 
-All colors, radii and sizes are CSS variables in `projects/ui/styles/theme.css`. Override any of them in your global styles:
+All colors, radii and sizes are CSS variables in `projects/ui/styles/theme.css`. Colors are `light-dark()` pairs, so one declaration covers both themes. Override any of them in your global styles:
 
 ```css
 :root {
-  --ui-primary: #0d9488;
-  --ui-primary-hover: #0f766e;
-  --ui-radius: 4px;
+  --ui-primary: light-dark(#0d9488, #2dd4bf);
+  --ui-primary-hover: light-dark(#0f766e, #5eead4);
+  --ui-on-primary: #ffffff;
+  --ui-radius: 8px;
 }
 ```
 
 Dark mode follows the OS setting automatically. Force a theme with `<html data-theme="dark">` or `data-theme="light"`.
+
+The default look is a neutral kit in the Radix/Linear style: slate grays, one blue accent, Inter. `DESIGN.md` documents the tokens and rules. The theme expects the [Inter](https://fontsource.org/fonts/inter) font; install `@fontsource-variable/inter` and add its `wght.css` to your styles, or set `--ui-font` to your own stack.
+
+## Design workflow (Impeccable)
+
+The repo ships the [Impeccable](https://github.com/pbakaus/impeccable) design skill for Claude Code in `.claude/skills/impeccable` (plus its agents in `.claude/agents`). In Claude Code:
+
+```
+/impeccable critique demo        # UX review of the demo page
+/impeccable audit projects/ui     # accessibility, performance, responsive checks
+/impeccable polish button         # final pass on one component
+```
+
+`PRODUCT.md` holds the product context, `DESIGN.md` the visual system, and `.impeccable/surfaces/` the per-surface briefs these commands read. To get automatic design checks after every edit, run `/impeccable hooks on` once (it adds a hook to your local Claude settings). To update the skill, run `npx impeccable update`.

@@ -39,10 +39,10 @@ let nextGroupId = 0;
     <div class="options"><ng-content /></div>
   `,
   styles: `
-    :host { display: flex; flex-direction: column; gap: 8px; font-family: var(--ui-font); }
-    .legend { font-size: 13px; font-weight: 600; color: var(--ui-text); }
+    :host { display: flex; flex-direction: column; gap: 10px; font-family: var(--ui-font); }
+    .legend { font-size: 13px; font-weight: 500; color: var(--ui-text); }
     .options { display: flex; flex-direction: column; gap: 10px; }
-    :host([data-direction='horizontal']) .options { flex-direction: row; flex-wrap: wrap; gap: 20px; }
+    :host([data-direction='horizontal']) .options { flex-direction: row; flex-wrap: wrap; gap: 8px 12px; }
   `,
 })
 export class UiRadioGroup<T = unknown> implements ControlValueAccessor {
@@ -101,8 +101,8 @@ export class UiRadioGroup<T = unknown> implements ControlValueAccessor {
     </label>
   `,
   styles: `
-    :host { display: inline-flex; }
-    .root { display: inline-flex; align-items: flex-start; gap: 10px; cursor: pointer; font-size: 14px; color: var(--ui-text); }
+    :host { display: inline-flex; font-family: var(--ui-font); }
+    .root { position: relative; display: inline-flex; align-items: flex-start; gap: 8px; cursor: pointer; font-size: 14px; color: var(--ui-text); }
     .root.disabled { cursor: not-allowed; color: var(--ui-text-disabled); }
     input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
     .dot {
@@ -115,24 +115,27 @@ export class UiRadioGroup<T = unknown> implements ControlValueAccessor {
       border-radius: 50%;
       background: var(--ui-surface);
       box-sizing: border-box;
-      transition: border-color var(--ui-transition), box-shadow var(--ui-transition);
+      transition: border-color var(--ui-transition), background var(--ui-transition), box-shadow var(--ui-transition);
     }
     .dot::after {
       content: '';
       position: absolute;
-      inset: 3px;
+      inset: 4px;
       border-radius: 50%;
-      background: var(--ui-primary);
+      background: var(--ui-on-primary);
       transform: scale(0);
       transition: transform var(--ui-transition);
     }
     .root:hover .dot { border-color: var(--ui-primary); }
-    input:checked + .dot { border-color: var(--ui-primary); }
+    input:checked + .dot { background: var(--ui-primary); border-color: var(--ui-primary-edge); }
     input:checked + .dot::after { transform: scale(1); }
     input:focus-visible + .dot { box-shadow: var(--ui-focus-ring); }
-    input:disabled + .dot { opacity: 0.5; }
-    .text { display: flex; flex-direction: column; gap: 2px; line-height: 20px; }
+    input:disabled + .dot { background: var(--ui-surface-muted); border-color: var(--ui-border); }
+    input:disabled:checked + .dot { background: var(--ui-border); }
+    input:disabled + .dot::after { background: var(--ui-text-disabled); }
+    .text { display: flex; flex-direction: column; gap: 1px; line-height: 20px; }
     .description { font-size: 12px; line-height: 1.4; color: var(--ui-text-muted); }
+    .root.disabled .description { color: var(--ui-text-disabled); }
   `,
 })
 export class UiRadio<T = unknown> {
