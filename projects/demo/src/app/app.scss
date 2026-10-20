@@ -106,7 +106,16 @@ main { min-width: 0; padding-bottom: 24px; }
 
 .section { padding: 48px 0 40px; border-top: 1px solid var(--ui-border-strong); }
 .section-head { margin-bottom: 20px; }
-.section-head h2 { margin: 0 0 6px; font-size: 1.75rem; font-weight: 700; line-height: 1.2; letter-spacing: -0.015em; }
+.section-head h2 { display: flex; align-items: center; gap: 12px; margin: 0 0 6px; font-size: 1.75rem; font-weight: 700; line-height: 1.2; letter-spacing: -0.015em; }
+/* Each section is a destination: a small trail sign, the same shape as the rail's. */
+.section-head h2::before {
+  content: '';
+  flex: none;
+  width: 22px;
+  height: 14px;
+  background: var(--ui-primary);
+  clip-path: polygon(0 0, 68% 0, 100% 50%, 68% 100%, 0 100%);
+}
 .lead { max-width: 68ch; margin: 0; font-size: 16px; line-height: 1.55; color: var(--ui-text-muted); }
 
 code { font-family: var(--ui-font-mono); font-size: 0.86em; }
@@ -120,7 +129,8 @@ p code, .lead code { padding: 1px 5px; border-radius: var(--ui-radius-sm); backg
   border-radius: var(--ui-radius-lg);
 }
 .example + .example { margin-top: 32px; }
-.specimen h3, .output h3 { margin: 0 0 14px; font-size: 14px; font-weight: 600; color: var(--ui-text-muted); }
+.specimen h3 { margin: 0 0 16px; font-size: 17px; font-weight: 700; color: var(--ui-text); }
+.output h3 { margin: 0 0 14px; font-size: 14px; font-weight: 600; color: var(--ui-text-muted); }
 
 .row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 .row + .row { margin-top: 12px; }
@@ -173,7 +183,7 @@ pre {
 .output pre { padding: 0; font-size: 13px; }
 .state { padding: 2px 8px; border-radius: var(--ui-radius-sm); font-size: 13px; font-weight: 600; color: var(--ui-danger); background: var(--ui-danger-soft); }
 .state[data-valid='true'] { color: var(--ui-success); background: var(--ui-success-soft); }
-.error { margin: 6px 0 0 28px; font-size: 13px; font-weight: 600; color: var(--ui-danger); }
+.terms-error { margin-top: 6px; }
 .success { margin: 16px 0 0; font-size: 14px; font-weight: 600; color: var(--ui-success); }
 
 /* ---------- Table example ---------- */
@@ -233,6 +243,8 @@ pre {
     scrollbar-width: none;
   }
   .signpost ul { flex-direction: row; padding: 0; }
+  .signpost { mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent); }
+  .toolbar .search { flex-basis: 100%; max-width: none; }
   .signpost ul::before { display: none; }
   .signpost a { height: 32px; padding: 0 22px 0 10px; font-size: 14px; white-space: nowrap; }
   .intro { padding: 32px 0 32px; }

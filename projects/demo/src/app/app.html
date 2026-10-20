@@ -326,7 +326,7 @@
           <div>
             <ui-checkbox formControlName="terms">I accept the terms and conditions</ui-checkbox>
             @if (signup.controls.terms.invalid && signup.controls.terms.touched) {
-              <p class="error">Accept the terms to create an account</p>
+              <p class="ui-form-field__error terms-error" role="alert">Accept the terms to create an account</p>
             }
           </div>
           <div class="row">

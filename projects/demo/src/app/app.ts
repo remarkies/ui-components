@@ -46,21 +46,31 @@ export class App {
   }
 
   private watchSections() {
-    const visible = new Map<string, number>();
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) visible.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0);
-        // The first section (in page order) that is on screen wins.
-        const current = this.sections.find((s) => (visible.get(s.id) ?? 0) > 0);
-        if (current) this.active.set(current.id);
-      },
-      { rootMargin: '-72px 0px -55% 0px', threshold: [0, 0.01] },
-    );
-    for (const s of this.sections) {
-      const el = document.getElementById(s.id);
-      if (el) observer.observe(el);
-    }
-    this.destroyRef.onDestroy(() => observer.disconnect());
+    // The current section is the last one whose top has passed a reading line 40% down the viewport.
+    const update = () => {
+      const line = innerHeight * 0.4;
+      let current = this.sections[0].id;
+      for (const s of this.sections) {
+        const el = document.getElementById(s.id);
+        if (el && el.getBoundingClientRect().top <= line) current = s.id;
+      }
+      // At the very bottom the last section wins even if it is short.
+      if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2) current = this.sections.at(-1)!.id;
+      this.active.set(current);
+    };
+    let frame = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(update);
+    };
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll, { passive: true });
+    update();
+    this.destroyRef.onDestroy(() => {
+      removeEventListener('scroll', onScroll);
+      removeEventListener('resize', onScroll);
+      cancelAnimationFrame(frame);
+    });
   }
 
   // Code snippets
@@ -227,7 +237,7 @@ export class App {
     { key: 'status', header: 'Status', sortable: true },
     { key: 'projects', header: 'Projects', sortable: true, align: 'end' },
     { key: 'joined', header: 'Joined', sortable: true },
-    { key: 'actions', header: '', align: 'end', width: '1%' },
+    { key: 'actions', header: '', ariaLabel: 'Actions', align: 'end', width: '1%' },
   ];
   protected removeUser(user: User) {
     this.users.update((list) => list.filter((u) => u.id !== user.id));

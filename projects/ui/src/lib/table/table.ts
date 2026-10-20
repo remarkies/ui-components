@@ -21,6 +21,8 @@ export interface UiTableColumn<T> {
   /** Property of the row to display (also the sort key and the cell template name). */
   key: string;
   header: string;
+  /** Accessible name for a column whose visible header is empty, e.g. an actions column. */
+  ariaLabel?: string;
   sortable?: boolean;
   align?: 'start' | 'center' | 'end';
   width?: string;
@@ -105,8 +107,10 @@ export class UiCellDef<T = any> {
                       <path class="down" d="m5 9.5 3 3 3-3" />
                     </svg>
                   </button>
-                } @else {
+                } @else if (col.header) {
                   {{ col.header }}
+                } @else if (col.ariaLabel) {
+                  <span class="sr-only">{{ col.ariaLabel }}</span>
                 }
               </th>
             }
@@ -175,7 +179,17 @@ export class UiCellDef<T = any> {
       background: var(--ui-surface);
       overflow: hidden;
     }
-    .scroll { overflow-x: auto; }
+    /* Edge shadows appear only while there is more table to scroll to. */
+    .scroll {
+      position: relative;
+      overflow-x: auto;
+      background:
+        linear-gradient(to right, var(--ui-surface) 40%, transparent) left / 32px 100% no-repeat local,
+        linear-gradient(to left, var(--ui-surface) 40%, transparent) right / 32px 100% no-repeat local,
+        radial-gradient(farthest-side at 0 50%, light-dark(rgb(28 30 29 / 0.24), rgb(0 0 0 / 0.6)), transparent) left / 16px 100% no-repeat scroll,
+        radial-gradient(farthest-side at 100% 50%, light-dark(rgb(28 30 29 / 0.24), rgb(0 0 0 / 0.6)), transparent) right / 16px 100% no-repeat scroll;
+    }
+    .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
     table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
     th, td { padding: 11px 16px; text-align: left; border-bottom: 1px solid var(--ui-border); white-space: nowrap; }
     :host([data-dense]) th, :host([data-dense]) td { padding: 6px 12px; }
